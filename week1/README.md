@@ -1,14 +1,15 @@
 Day 1
 ---
+Main Project: Convert an Integer to itself in words (up to 1,000,000!)
 Partner: Anastasia Zorko
 * Arrays
-* Enum
-* Hash
+* Hashes
+* Enumerable
 * Strings
-* Integer -> Word String (up to 1,000,000)
 
 Day 2
 ---
+Main Project: Tic-Tac-Toe (with an AI)
 Partner: Matt Graser
 * Methods
 * Reverse Polish Notation calculator
