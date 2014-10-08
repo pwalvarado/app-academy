@@ -12,6 +12,7 @@ Partner: Anastasia Zorko
 Day 2
 ---
 **Main Project**: Tic-Tac-Toe (with an AI)
+
 Minor Project: Reverse Polish Notation calculator
 
 Partner: Matt Graser
