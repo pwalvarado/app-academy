@@ -22,3 +22,14 @@ Partner: Matt Graser
 * Symobls, options hashes
 * Iteration/Loops
 * Classes
+
+Day 3
+---
+**Main Project**: Hangman (with an AI)
+
+Minor Project: Mastermind
+
+Partner: Adam Berman
+
+* Class design, class interactions
+* Method design (brief and focused: 28 out of 37 methods in hangman.rb are one or two lines)
