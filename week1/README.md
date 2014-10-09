@@ -4,6 +4,8 @@ Day 1
 
 Partner: Anastasia Zorko
 
+Focus:
+
 * Arrays
 * Hashes
 * Enumerable
@@ -16,6 +18,8 @@ Day 2
 Minor Project: Reverse Polish Notation calculator
 
 Partner: Matt Graser
+
+Focus:
 
 * Methods
 * File I/O
@@ -30,6 +34,8 @@ Day 3
 Minor Project: Mastermind
 
 Partner: Adam Berman
+
+Focus:
 
 * Class design, class interactions
 * Method design (brief and focused: 28 out of 37 methods in hangman.rb are one or two lines)
