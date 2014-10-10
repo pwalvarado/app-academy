@@ -63,4 +63,4 @@ class WordChainer
 end
 
 word_chainer = WordChainer.new('dictionary.txt')
-word_chainer.run("duck", "mock")
+word_chainer.run("monster", "lovely")
