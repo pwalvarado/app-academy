@@ -63,26 +63,3 @@ def eval_block(*args)
     puts "NO BLOCK GIVEN"
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
