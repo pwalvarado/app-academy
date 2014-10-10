@@ -1,12 +1,4 @@
-App-Academy
+app-academy
 ===========
 
-My App Academy work
-
-
-Links
-==
-
-[Pair timer](http://e.ggtimer.com/)
-
-[Markdown editor](http://dillinger.io/)
+The code that I've written at App Academy.
