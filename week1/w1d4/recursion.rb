@@ -76,7 +76,8 @@ def bsearch(array, target)
     bsearch(left_half, target)
   else
     right_half = array[middle_index + 1...array.size]
-    bsearch(right_half, target)
+    ans_from_right_half = bsearch(right_half, target)
+    ans_from_right_half.nil? ? nil : ans_from_right_half + (middle_index + 1)
   end
 end
 
