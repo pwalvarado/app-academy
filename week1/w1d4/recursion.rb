@@ -167,22 +167,3 @@ class Array
     arrays.map { |array| array + [el] }
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
