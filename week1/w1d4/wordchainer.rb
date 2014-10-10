@@ -31,7 +31,7 @@ class WordChainer
       break if all_seen_words.keys.include?(target)
     end
     
-    p build_path(source, target)
+    puts build_path(source, target)
   end
   
   def explore_current_words
@@ -63,4 +63,4 @@ class WordChainer
 end
 
 word_chainer = WordChainer.new('dictionary.txt')
-word_chainer.run("monster", "lovely")
+word_chainer.run("neat", "code")

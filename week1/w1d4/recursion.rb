@@ -67,17 +67,16 @@ end
 
 def bsearch(array, target)
   return nil if array.empty?
-  sorted = array.sort
   middle_index = array.size / 2
-  middle_value = sorted[middle_index]
+  middle_value = array[middle_index]
   if target == middle_value
     middle_index
   elsif target < middle_value
-    left_half = sorted[0...middle_index]
+    left_half = array[0...middle_index]
     bsearch(left_half, target)
   else
-    right_half = sorted[middle_index + 1...array.size]
-    bsearch(righ_half, target)
+    right_half = array[middle_index + 1...array.size]
+    bsearch(right_half, target)
   end
 end
 
