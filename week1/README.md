@@ -39,3 +39,14 @@ Focus:
 
 * Class design, class interactions
 * Method design (brief and focused: 28 out of 37 methods in hangman.rb are one or two lines)
+
+Day 4
+---
+**Main Project**: Word Chainer (eg.:neat > beat > belt > bolt > bole > bode > code)
+
+Partner: Aaron Hurley
+
+Focus:
+
+* Blocks, procs, and lambdas
+* Recursion
