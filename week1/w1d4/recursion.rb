@@ -156,10 +156,8 @@ class Array
     elsif self.size == 1
       [[], self]
     else
-      subs = []
       prior_values = self[0...self.size - 1]
-      subs += prior_values.subsets + combine(self.last, prior_values.subsets)
-      subs
+      prior_values.subsets + combine(self.last, prior_values.subsets)
     end
   end
   
