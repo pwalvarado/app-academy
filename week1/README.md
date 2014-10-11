@@ -50,3 +50,16 @@ Focus:
 
 * Blocks, procs, and lambdas
 * Recursion
+
+Day 5
+---
+**Main Project**: Knight's Travails
+
+Partner: Mark Doss
+
+Focus:
+
+* Tree data structures
+* Breadth-first search (BFS)
+* Depth-first search (DFS)
+* Recursion
