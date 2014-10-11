@@ -53,7 +53,7 @@ Focus:
 
 Day 5
 ---
-**Main Project**: Knight's Travails
+**Main Projects**: Knight's Travails, Tic-Tac-Toe AI
 
 Partner: Mark Doss
 
