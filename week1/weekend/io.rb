@@ -1,9 +1,10 @@
+#!/usr/bin/env ruby
+
 class GuessingGame
   attr_accessor :secret_num
 
   def initialize
     @secret_num = rand(1..100)
-    @tokens = ( ARGV.empty? ? nil : File.read(ARGV[0]).split("\n") )
   end
 
   def play
@@ -32,6 +33,7 @@ class RPNCalculator
 
   def initialize
     @stack = []
+    @tokens = ( ARGV.empty? ? nil : File.read(ARGV[0]).split("\n") )
   end
 
   def value(operation)
