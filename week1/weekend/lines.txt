@@ -1,0 +1,5 @@
+this is line 1
+here's 2
+another line
+these will be shuffled 
+if still in order then something's wrong or really lucky
