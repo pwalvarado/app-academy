@@ -50,4 +50,4 @@ def english_substrings(string)
   substrings.select { |substr| words.include?(substr) }
 end
 
-p english_substrings('cat')
+# p english_substrings('cat')

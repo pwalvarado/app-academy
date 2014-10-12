@@ -53,10 +53,11 @@ class RPNCalculator
   end
 
   def run
+    puts "Enter to quit."
     loop do
       p stack
-      p "latest value: #{stack.last}"
       input = next_input
+      break if input.nil? || input == ""
       input = parse_input(input)
       if operator?(input)
         stack.push(value(input))
@@ -75,10 +76,10 @@ class RPNCalculator
   end
 
   def parse_input(input)
-    if ('0'..'9').cover?(input)
-      Integer(input)
-    else
+    if %w{+ - * /}.include?(input)
       input.to_sym
+    else
+      Integer(input)
     end
   end
 
