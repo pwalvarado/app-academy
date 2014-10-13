@@ -10,12 +10,12 @@ class PolyTreeNode
     @children = []
   end
 
-  def parent=(parent)
+  def parent=(new_parent)
     old_parent = @parent
-    @parent = parent
-    unless parent.nil? || parent.children.include?(self)
-      parent.children << self
-      old_parent.children.delete(self) unless old_parent.nil?
+    @parent = new_parent
+    old_parent.children.delete(self) unless old_parent.nil?
+    unless new_parent.nil? || new_parent.children.include?(self)
+      new_parent.children << self
     end
   end
 
@@ -24,8 +24,11 @@ class PolyTreeNode
   end
 
   def remove_child(child_node)
-    children.include?(child_node) ?
-      (child_node.parent = nil) : (raise 'No such child.')
+    if children.include?(child_node)
+      child_node.parent = nil
+    else
+      raise 'No such child.'
+    end
   end
 
   def dfs(target)

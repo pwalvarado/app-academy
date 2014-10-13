@@ -11,7 +11,6 @@ class RockPaperScissors
       puts "rock, paper, or scissors? (q = quit)"
       player_move = gets.chomp
       computer_move = WINS.keys.sample
-      match = [player_move, computer_move]
       if WINS[player_move] == computer_move
         puts "#{computer_move.capitalize}, Win"
       elsif player_move == computer_move
@@ -31,15 +30,13 @@ def remix(drinks)
   random_mixers = drinks.map { |drink| drink.last }.shuffle
   wonky_drinks = drinks
   until wonky_drinks & drinks == []
-    wonky_drinks = random_alcohols.map.with_index do |alcohol, i|
-      [alcohol, random_mixers[i]]
-    end
+    wonky_drinks = random_alcohols.zip(random_mixers)
   end
   wonky_drinks
 end
 
-p remix([
-  ["rum", "coke"],
-  ["gin", "tonic"],
-  ["scotch", "soda"]
-])
+# p remix([
+#   ["rum", "coke"],
+#   ["gin", "tonic"],
+#   ["scotch", "soda"]
+# ])

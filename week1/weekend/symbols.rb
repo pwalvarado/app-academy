@@ -1,4 +1,4 @@
-def super_print(string, options)
+def super_print(string, options = {})
   defaults = {
     :times => 1,
     :upcase => false,
@@ -21,3 +21,4 @@ end
 # p string
 # p options
 
+# super_print(string)

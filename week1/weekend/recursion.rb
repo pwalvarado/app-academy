@@ -78,10 +78,8 @@ end
 # p mixed_arr
 
 def fibs(count)
-  if count == 1
-    [0]
-  elsif count == 2
-    [0, 1]
+  if count <= 2
+    [0, 1].take(count)
   else
     prev = fibs(count - 1)
     prev << prev[-2] + prev[-1]
@@ -97,10 +95,10 @@ def bsearch(array, target)
   mid_index = array.size / 2
   mid_value = array[mid_index]
   case  target <=> mid_value
+  when 0 then mid_index
   when -1
     left = array[0...mid_index]
     bsearch(left, target)
-  when 0 then mid_index
   when 1
     right = array[mid_index + 1...array.size]
     bsearch(right, target).nil? ? nil : (mid_index + 1) + bsearch(right, target)
@@ -113,13 +111,13 @@ end
 # p bsearch([1,2,3,4,5],6)
 
 def make_change(total, coins)
-  # binding.pry
   return [] if total.zero?
+  return nil if coins.none? { |coin| coin <= total }
   best_change = nil
   coins.each do |first_coin|
     next if total < first_coin
-    using_coins = coins.select { |coin| coin <= first_coin }
-    this_change = [first_coin] + make_change(total - first_coin, using_coins)
+    coins_to_use = coins.select { |coin| coin <= first_coin }
+    this_change = [first_coin] + make_change(total - first_coin, coins_to_use)
     if best_change.nil? || this_change.size < best_change.size
       best_change = this_change
     end
@@ -128,6 +126,9 @@ def make_change(total, coins)
 end
 
 # p make_change(14, [10, 7, 1])
+# p make_change(24, [10, 7, 1])
+# p make_change(550, [25, 10, 5, 1])
+# p make_change(553, [25, 10, 5, 1])
 
 class Array
   def merge_sort
@@ -158,9 +159,8 @@ end
 
 def subsets(array)
   return [[]] if array.empty?
-  last_item = array.last
-  other_items = array[0...-1]
-  subsets(other_items) + subsets(other_items).map { |subs| subs << last_item}
+  prev_items = array[0...-1]
+  subsets(prev_items) + subsets(prev_items).map { |subset| subset << array.last}
 end
 
 # p subsets([])
