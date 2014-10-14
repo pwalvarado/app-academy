@@ -205,7 +205,7 @@ class Minesweeper
 
   def command
     puts "Choose a tile. Column then row. Ex.: 45 (to reveal) or f81 (to flag)"
-    puts "Press q to quit."
+    puts "Press q to quit. (You can save the game.)gam"
     gets.chomp
   end
 
@@ -268,12 +268,13 @@ class Minesweeper
   end
   
   def display_leaderboard
-    puts "Leaderboard:".center(16)
-    sorted_leaderboard.take(10).each do |leader, time|
+    puts "Leaderboard:".center(17)
+    puts "(Top 3 Scores)".center(17)
+    sorted_leaderboard.take(3).each do |leader, time|
       puts "#{leader.ljust(12)} #{time.round(2)}"
     end
   end
 end
 
-game = Minesweeper.new(9, 6)
+game = Minesweeper.new(9, 4)
 game.play
