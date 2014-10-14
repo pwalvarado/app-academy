@@ -129,7 +129,7 @@ class Board
     tiles.any? { |tile| tile.revealed && tile.bomb }
   end
 
-  def reveal_all_mines
+  def reveal_all_bombs
     tiles.select { |tile| tile.bomb }.each { |bomb| bomb.reveal }
   end
   
@@ -213,8 +213,8 @@ class Minesweeper
     command[0] == 'q' ? quit : make_move(parse(command))
   end
 
-  def parse(command)
-    [pos(command), action(command)]
+  def parse(move_string)
+    [pos(move_string), action(move_string)]
   end
 
   def pos(move_string)
@@ -247,7 +247,7 @@ class Minesweeper
       puts "You won the game! Nice work finding all of the mines!"
     else
       puts "You hit a mine! Think harder next time!"
-      board.reveal_all_mines
+      board.reveal_all_bombs
     end
   end
   
