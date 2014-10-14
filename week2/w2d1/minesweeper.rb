@@ -4,7 +4,7 @@ require 'yaml'
 class Tile
   attr_accessor :board, :bomb, :pos, :revealed, :flagged
 
-  MOVES = [[1, 1],
+  DIFFS = [[1, 1],
            [1, 0],
            [1, -1],
            [0, -1],
