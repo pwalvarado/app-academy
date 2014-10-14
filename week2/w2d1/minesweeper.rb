@@ -2,7 +2,7 @@
 require 'yaml'
 
 class Tile
-  attr_accessor :board, :bomb, :pos, :revealed, :flagged
+  attr_accessor :board, :pos, :bomb, :revealed, :flagged
 
   DIFFS = [[1, 1],
            [1, 0],
@@ -15,7 +15,7 @@ class Tile
   ]
 
   def neighbor_poses
-    new_pos = MOVES.map do |move|
+    new_pos = DIFFS.map do |move|
       dx, dy = move[0], move[1]
       [pos[0] + dx, pos[1] + dy]
     end
