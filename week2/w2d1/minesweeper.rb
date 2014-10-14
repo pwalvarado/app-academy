@@ -101,7 +101,7 @@ class Board
   end
 
   def display
-    puts "Time: #{time_elapsed}"
+    puts "Time: #{time_elapsed.round(2)} sec"
     puts display_string = "  " + (0...size).map { |col| "_#{col}_"}.join
     rows.map.with_index do |row, i|
        puts "#{i}|#{row.map(&:to_s).join}"
@@ -204,8 +204,8 @@ class Minesweeper
   end
 
   def command
-    puts "Choose a tile. Column then row. Ex.: 45 (to reveal) or f81 (to flag)"
-    puts "Press q to quit. (You can save the game.)gam"
+    puts "Choose a tile, column then row. Ex.: 45 (to reveal) or f81 (to flag)"
+    puts "Press q to quit. (You can save the game.)"
     gets.chomp
   end
 
@@ -246,7 +246,7 @@ class Minesweeper
     if board.won?
       puts "You won the game! Nice work finding all of the mines!"
     else
-      puts "You hit a mine! You suck at this!"
+      puts "You hit a mine! Think harder next time!"
       board.reveal_all_mines
     end
   end
@@ -268,13 +268,13 @@ class Minesweeper
   end
   
   def display_leaderboard
-    puts "Leaderboard:".center(17)
-    puts "(Top 3 Scores)".center(17)
+    puts "Leaderboard:".center(19)
+    puts "(Top 3 Scores)".center(19)
     sorted_leaderboard.take(3).each do |leader, time|
-      puts "#{leader.ljust(12)} #{time.round(2)}"
+      puts "#{leader.ljust(12)} #{time.round(2)} sec"
     end
   end
 end
 
-game = Minesweeper.new(9, 4)
+game = Minesweeper.new(9, 8)
 game.play
