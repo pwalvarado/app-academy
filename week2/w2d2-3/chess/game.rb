@@ -14,16 +14,18 @@ class Game
   
   def play
     until false do
+      board.display(cursor_pos)
       play_turn
     end
   end
 
   def play_turn
-    board.display(cursor_pos)
     source_pos = select_pos
     dest_pos = select_pos
     board.move(source_pos, dest_pos)
-  rescue IllegalMoveError
+  rescue IllegalMoveError => e
+    board.display(cursor_pos)
+    puts "#{e.class}: #{e.message}"
     retry
   end
 

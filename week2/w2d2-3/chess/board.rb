@@ -15,10 +15,13 @@ class Board
   end
 
   def move(source_pos, dest_pos)
-    if self[source_pos].valid_moves.include?(dest_pos)
-      move!(source_pos, dest_pos)
+    if self[source_pos].nil?
+      raise IllegalMoveError.new('There is no piece to move on that square.')
+    elsif !self[source_pos].valid_moves.include?(dest_pos)
+      raise IllegalMoveError.new('That move puts you in check.') if self[source_pos].moves.include?(dest_pos)
+      raise IllegalMoveError.new('Not a valid move destination.')
     else
-      raise IllegalMoveError
+      move!(source_pos, dest_pos)
     end
   end
 
