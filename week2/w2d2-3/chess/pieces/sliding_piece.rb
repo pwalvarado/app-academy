@@ -30,7 +30,7 @@ class SlidingPiece < Piece
     base_x, base_y = pos
     x, y = base_x + dx, base_y + dy
     
-    until offboard?(x ,y) || piece_hit?(x, y)
+    until board.offboard?([x ,y]) || piece_hit?(x, y)
       dir_moves << [x, y]
       x += dx
       y += dy
@@ -41,14 +41,10 @@ class SlidingPiece < Piece
   end
 
   def valid_capture?(x, y)
-    !offboard?(x, y) && board[[x, y]] && board[[x, y]].color != color
+    !board.offboard?([x, y]) && board[[x, y]] && board[[x, y]].color != color
   end
   
   def piece_hit?(x, y)
     !!board[[x, y]]# ? true : false
-  end
-  
-  def offboard?(x, y)
-    [x, y].any? {|i| i < 0 || i > 7}
   end
 end

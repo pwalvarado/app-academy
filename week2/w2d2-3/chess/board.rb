@@ -7,11 +7,12 @@ class IllegalMoveError < RuntimeError
 end
 
 class Board
-  attr_accessor :pieces, :captured_pieces, :winner, :loser
+  attr_accessor :pieces, :winner, :loser, :cursor_pos
   
   def initialize(blank = false)
     @pieces = Array.new(8) { Array.new(8) }
     set_board unless blank
+    @cursor_pos = [4, 6]
   end
 
   def move(source_pos, dest_pos, current_player_color)
@@ -129,7 +130,7 @@ class Board
     end
   end  
   
-  def display(cursor_pos, current_player_color)
+  def display(current_player_color)
     system("clear")
     display_str = "\n     " + "                    \n".on_white
     pieces.each_with_index do |row, row_i|
@@ -151,5 +152,16 @@ class Board
     else
       (row_i + col_i).even? ? square_char.on_blue : square_char
     end
+  end
+
+  def move_cursor(diff)
+    dx, dy = diff
+    new_cursor_pos = [cursor_pos[0] + dx, cursor_pos[1] + dy]
+    self.cursor_pos = new_cursor_pos unless offboard?(new_cursor_pos)
+  end
+
+  def offboard?(pos)
+    x, y = pos
+    [x, y].any? {|i| i < 0 || i > 7}
   end
 end
