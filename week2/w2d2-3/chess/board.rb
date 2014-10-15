@@ -9,19 +9,22 @@ end
 class Board
   attr_accessor :pieces, :captured_pieces
   
-  def initialize
+  def initialize(blank = false)
     @pieces = Array.new(8) { Array.new(8) }
-    @captured_pieces = []
-    set_board
+    set_board unless blank
   end
 
   def move(source_pos, dest_pos)
-    piece = self[source_pos]
-    if !piece.nil? && piece.moves.include?(dest_pos)
-      piece.move(dest_pos)
+    if self[source_pos].valid_moves.include?(dest_pos)
+      move!(source_pos, dest_pos)
     else
       raise IllegalMoveError
     end
+  end
+
+  def move!(source_pos, dest_pos)
+    piece = self[source_pos]
+    piece.move(dest_pos)
   end
 
   def [](pos)
@@ -43,9 +46,24 @@ class Board
     self[new_pos]
   end
 
+  def deep_dup
+    dup_board = Board.new(true)
+    pieces.flatten.compact.each do |piece|
+      dup_pos = piece.pos.dup
+      piece_type = piece.class
+      dup_board[dup_pos] = piece_type.new(dup_board, dup_pos, piece.color)
+    end
+    dup_board
+  end
+
   def in_check?(color)
     king = find_king(color)
     team_pieces(opp_color(color)).any? { |piece| piece.moves.include?(king.pos) }
+  end
+
+  def checkmate?(color)
+    team_pieces(color).select { |piece| !piece.valid_moves.empty? }.each { |piece| p piece; p piece.valid_moves } if color == :black
+    team_pieces(color).all? { |piece| piece.valid_moves.empty? }
   end
 
   def opp_color(color)
@@ -95,13 +113,15 @@ class Board
   end  
   
   def display(cursor_pos)
-    system("clear")
+    # system("clear")
     puts "   0 1 2 3 4 5 6 7"
     pieces.each_with_index do |row, row_i|
       puts "#{row_i}:" + row.map.with_index { |piece, col_i| print_square(piece, row_i, col_i, cursor_pos) }.to_a.join
     end
     puts "Black in check: #{in_check?(:black)}"
     puts "White in check: #{in_check?(:white)}"
+    puts "Black in checkmate: #{checkmate?(:black)}"
+    puts "White in checkmate: #{checkmate?(:white)}"
   end
   
   def print_square(piece, row_i, col_i, cursor_pos)
