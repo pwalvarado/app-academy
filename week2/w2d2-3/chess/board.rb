@@ -62,7 +62,6 @@ class Board
   end
 
   def checkmate?(color)
-    team_pieces(color).select { |piece| !piece.valid_moves.empty? }.each { |piece| p piece; p piece.valid_moves } if color == :black
     team_pieces(color).all? { |piece| piece.valid_moves.empty? }
   end
 
@@ -113,15 +112,11 @@ class Board
   end  
   
   def display(cursor_pos)
-    # system("clear")
+    system("clear")
     puts "   0 1 2 3 4 5 6 7"
     pieces.each_with_index do |row, row_i|
       puts "#{row_i}:" + row.map.with_index { |piece, col_i| print_square(piece, row_i, col_i, cursor_pos) }.to_a.join
     end
-    puts "Black in check: #{in_check?(:black)}"
-    puts "White in check: #{in_check?(:white)}"
-    puts "Black in checkmate: #{checkmate?(:black)}"
-    puts "White in checkmate: #{checkmate?(:white)}"
   end
   
   def print_square(piece, row_i, col_i, cursor_pos)
