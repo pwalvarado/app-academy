@@ -12,7 +12,7 @@ class Bishop < SlidingPiece
   end
   
   def to_s
-    color == :white ? "♗" : "♝"
+    color == :white ? "♝" : "♗"
   end
   
 end

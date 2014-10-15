@@ -12,6 +12,6 @@ class Rook < SlidingPiece
   end
   
   def to_s
-    color == :white ? "♖" : "♜"
+    color == :white ? "♜" : "♖"
   end
 end

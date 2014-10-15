@@ -14,15 +14,26 @@ class Board
     set_board unless blank
   end
 
-  def move(source_pos, dest_pos)
-    if self[source_pos].nil?
+  def move(source_pos, dest_pos, current_player)
+    piece_to_move = self[source_pos]
+    if game_over?
+      winner = ( checkmate?(:black) ? "White" : "Black" )
+      loser = ( checkmate?(:black) ? "Black" : "White" )
+      raise IllegalMoveError.new("Game over. #{winner} won. #{loser} lost.")
+    elsif piece_to_move.nil?
       raise IllegalMoveError.new('There is no piece to move on that square.')
+    elsif piece_to_move.color != current_player
+      raise IllegalMoveError.new("It is #{current_player.capitalize}'s turn; move a #{current_player.capitalize} piece.")
     elsif !self[source_pos].valid_moves.include?(dest_pos)
-      raise IllegalMoveError.new('That move puts you in check.') if self[source_pos].moves.include?(dest_pos)
+      raise IllegalMoveError.new('That move puts you in check.') if piece_to_move.moves.include?(dest_pos)
       raise IllegalMoveError.new('Not a valid move destination.')
     else
       move!(source_pos, dest_pos)
     end
+  end
+
+  def game_over?
+    checkmate?(:white) || checkmate?(:black)
   end
 
   def move!(source_pos, dest_pos)
