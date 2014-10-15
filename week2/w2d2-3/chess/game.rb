@@ -1,6 +1,7 @@
 require './pieces.rb'
 require './board.rb'
 require './human_player.rb'
+require './computer_player.rb'
 require 'io/console'
 require 'colorize'
 require 'pry'
@@ -63,7 +64,7 @@ class Game
   end
 end
 
-david = HumanPlayer.new
-eline = HumanPlayer.new
-game = Game.new(david, eline)
+human_player = HumanPlayer.new
+computer_player = ComputerPlayer.new
+game = Game.new(human_player, computer_player)
 game.play
