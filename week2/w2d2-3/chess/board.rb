@@ -130,18 +130,20 @@ class Board
     end
   end  
   
-  def display(current_player_color)
+  def display(color, name)
     system("clear")
     display_str = "\n     " + "                    \n".on_white
     pieces.each_with_index do |row, row_i|
       display_str << '     ' + "  ".on_white + "#{row.map.with_index { |piece, col_i| print_square(piece, row_i, col_i, cursor_pos) }.to_a.join}" + "  \n".on_white
     end
     display_str << "     " + "                    \n".on_white
-    display_str << "\n      It is #{current_player_color.capitalize}'s turn.\n\n"
-    display_str << "   Move with i, j, k, and l.\n"
-    display_str << "  Spacebar to select a piece,\n"
-    display_str << "  and place it where you like.\n"
-    display_str << "       'q' to quit.\n\n"
+    puts display_str
+    puts "  #{name}, it's your turn.".center(31, ' ')
+    display_str = "        You are #{color.capitalize}.\n\n"
+    display_str << "    Move with i, j, k, and l.\n"
+    display_str << "   Spacebar to select a piece,\n"
+    display_str << "   and place it where you like.\n"
+    display_str << "        'q' to quit.\n\n"
     puts display_str
   end
   

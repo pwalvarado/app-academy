@@ -16,13 +16,14 @@ class Game
     @board = Board.new
     @players = [player1, player2]
     assign_players_colors
+    setup_player_names
     show_players_board
   end
   
   def play
     catch :quit do
       until board.game_over? do
-        board.display(current_player.color)
+        board.display(current_player.color, current_player.name)
         play_turn
       end
       puts "Game over. #{board.winner} won!"
@@ -39,6 +40,10 @@ class Game
     players.each { |player| player.board = board }
   end
 
+  def setup_player_names
+    players.each_with_index { |player, player_i| player.set_name(player_i + 1) }
+  end
+
   def current_player
     players.first
   end
@@ -52,7 +57,7 @@ class Game
     board.move(source_pos, dest_pos, current_player.color)
     change_turn
   rescue IllegalMoveError => e
-    board.display(current_player.color)
+    board.display(current_player.color, current_player.name)
     puts "#{e.class}: #{e.message}"
     retry
   end
