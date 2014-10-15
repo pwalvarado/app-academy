@@ -2,6 +2,7 @@ require './pieces.rb'
 require './board.rb'
 require 'io/console'
 require 'colorize'
+require 'pry'
 
 class Game
   attr_accessor :board, :cursor_pos
@@ -31,7 +32,8 @@ class Game
     when 'c' then :up
     when 't' then :down
     when 'h' then :left
-    when 'n' then :right 
+    when 'n' then :right
+    when 'b' then :pry
     end
   end
 
@@ -41,6 +43,9 @@ class Game
     when :down then [0, 1]
     when :right then [1, 0]
     when :left then [-1, 0]
+    when :pry
+      binding.pry
+      [0, 0]
     end
     dx, dy = diff
     self.cursor_pos = [cursor_pos[0] + dx, cursor_pos[1] + dy]

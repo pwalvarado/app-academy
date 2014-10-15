@@ -17,7 +17,7 @@ class Board
 
   def move(source_pos, dest_pos)
     piece = self[source_pos]
-    if piece.moves.include?(dest_pos)
+    if !piece.nil? && piece.moves.include?(dest_pos)
       piece.move(dest_pos)
     else
       raise IllegalMoveError
@@ -41,6 +41,27 @@ class Board
     dx, dy = diff
     new_pos = [x + dx, y + dy]
     self[new_pos]
+  end
+
+  def in_check?(color)
+    king = find_king(color)
+    team_pieces(opp_color(color)).any? { |piece| piece.moves.include?(king.pos) }
+  end
+
+  def opp_color(color)
+    color == :white ? :black : :white
+  end
+
+  def team_pieces(color)
+    pieces.flatten.compact.select { |piece| piece.color == color }
+  end
+
+  def find_pieces(type, color)
+    team_pieces(color).select { |piece| piece.is_a?(type) }
+  end
+
+  def find_king(color)
+    team_pieces(color).find { |piece| piece.is_a?(King) }
   end
   
   def set_board
@@ -79,6 +100,8 @@ class Board
     pieces.each_with_index do |row, row_i|
       puts "#{row_i}:" + row.map.with_index { |piece, col_i| print_square(piece, row_i, col_i, cursor_pos) }.to_a.join
     end
+    puts "Black in check: #{in_check?(:black)}"
+    puts "White in check: #{in_check?(:white)}"
   end
   
   def print_square(piece, row_i, col_i, cursor_pos)
