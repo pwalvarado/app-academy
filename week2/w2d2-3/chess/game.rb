@@ -22,6 +22,8 @@ class Game
     source_pos = select_pos
     dest_pos = select_pos
     board.move(source_pos, dest_pos)
+  rescue IllegalMoveError
+    retry
   end
 
   def cursor_dir(input)

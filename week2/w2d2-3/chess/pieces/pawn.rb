@@ -10,7 +10,21 @@ class Pawn < SteppingPiece
   end
   
   def move_diffs
-    color == :black ? [[0, 1]] : [[0, -1]]
+    if color == :white
+      [[0, -1]] + white_attacks
+    else
+      [[0, 1]] + black_attacks
+    end
+  end
+
+  def white_attacks
+    attacks = [[-1, -1], [1, -1]]
+    attacks.select { |attack| !board.piece(pos, attack).nil? }
+  end
+
+  def black_attacks
+    attacks = [[-1, 1], [1, 1]]
+    attacks.select { |attack| !board.piece(pos, attack).nil? }
   end
   
   def to_s

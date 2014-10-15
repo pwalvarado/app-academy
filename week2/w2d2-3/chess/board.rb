@@ -35,6 +35,13 @@ class Board
     y = pos[1]
     pieces[y][x] = piece
   end
+
+  def piece(old_pos, diff)
+    x, y = old_pos
+    dx, dy = diff
+    new_pos = [x + dx, y + dy]
+    self[new_pos]
+  end
   
   def set_board
     # black power row
