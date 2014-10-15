@@ -13,21 +13,15 @@ class Game
   
   def play
     until false do
-      p 'playing'
       play_turn
     end
   end
 
   def play_turn
-    p 'playing'
-    puts 'a'
-    puts 'b'
     board.display(cursor_pos)
     source_pos = select_pos
     dest_pos = select_pos
     board.move(source_pos, dest_pos)
-    puts 'here'
-    board.display(cursor_pos)
   end
 
   def cursor_dir(input)
