@@ -125,12 +125,15 @@ class Board
     end
   end  
   
-  def display(cursor_pos)
+  def display(cursor_pos, current_player)
     system("clear")
-    puts "   0 1 2 3 4 5 6 7"
+    display_str = "                    \n".on_white
     pieces.each_with_index do |row, row_i|
-      puts "#{row_i}:" + row.map.with_index { |piece, col_i| print_square(piece, row_i, col_i, cursor_pos) }.to_a.join
+      display_str << "  ".on_white + "#{row.map.with_index { |piece, col_i| print_square(piece, row_i, col_i, cursor_pos) }.to_a.join}" + "  \n".on_white
     end
+    display_str << "                    \n".on_white
+    display_str << "\nIt is #{current_player.capitalize}'s turn."
+    puts display_str.center(25, ' ')
   end
   
   def print_square(piece, row_i, col_i, cursor_pos)
