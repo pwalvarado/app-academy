@@ -1,8 +1,13 @@
 # encoding: utf-8
-require './piece.rb'
+require_relative './piece.rb'
 
 class SteppingPiece < Piece
-  
+  attr_reader :board
+
+  def initialize(board, pos, color)
+    super(board, pos, color)
+  end
+
   def moves
     moves = []
     move_diffs.each do |diff|

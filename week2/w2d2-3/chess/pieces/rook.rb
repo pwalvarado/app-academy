@@ -1,6 +1,6 @@
 # encoding: utf-8
-require './piece.rb'
-require './sliding_piece.rb'
+require_relative './piece.rb'
+require_relative './sliding_piece.rb'
 
 class Rook < SlidingPiece
   

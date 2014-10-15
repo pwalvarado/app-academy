@@ -1,14 +1,19 @@
 # encoding: utf-8
-require './piece.rb'
+require_relative './piece.rb'
 
 class SlidingPiece < Piece
+  attr_reader :board
+
+  def initialize(board, pos, color)
+    super(board, pos, color)
+  end
   
   def moves
-    moves = []
+    almost_valid_moves = []
     move_dirs.each do |dir|
-      moves += moves_in_dir(dir)
+      almost_valid_moves += moves_in_dir(dir)
     end
-    moves 
+    almost_valid_moves 
   end
   
   # def all_moves(dir)
@@ -31,8 +36,12 @@ class SlidingPiece < Piece
       y += dy
     end
     
-    dir_moves << [x, y] if board[[x, y]] && board[[x, y]].color != color
+    dir_moves << [x, y] if valid_capture?(x, y)
     dir_moves
+  end
+
+  def valid_capture?(x, y)
+    !offboard?(x, y) && board[[x, y]] && board[[x, y]].color != color
   end
   
   def piece_hit?(x, y)
