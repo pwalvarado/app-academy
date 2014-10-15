@@ -14,14 +14,14 @@ class Board
     set_board unless blank
   end
 
-  def move(source_pos, dest_pos, current_player)
+  def move(source_pos, dest_pos, current_player_color)
     piece_to_move = self[source_pos]
     if game_over?
       raise IllegalMoveError.new("Game over. #{winner} won. #{loser} lost.")
     elsif piece_to_move.nil?
       raise IllegalMoveError.new('There is no piece to move on that square.')
-    elsif piece_to_move.color != current_player
-      raise IllegalMoveError.new("It is #{current_player.capitalize}'s turn; move a #{current_player.capitalize} piece.")
+    elsif piece_to_move.color != current_player_color
+      raise IllegalMoveError.new("It is #{current_player_color.capitalize}'s turn; move a #{current_player_color.capitalize} piece.")
     elsif !self[source_pos].valid_moves.include?(dest_pos)
       raise IllegalMoveError.new('That move puts you in check.') if piece_to_move.moves.include?(dest_pos)
       raise IllegalMoveError.new('Not a valid move destination.')
@@ -129,15 +129,19 @@ class Board
     end
   end  
   
-  def display(cursor_pos, current_player)
+  def display(cursor_pos, current_player_color)
     system("clear")
-    display_str = "                    \n".on_white
+    display_str = "\n     " + "                    \n".on_white
     pieces.each_with_index do |row, row_i|
-      display_str << "  ".on_white + "#{row.map.with_index { |piece, col_i| print_square(piece, row_i, col_i, cursor_pos) }.to_a.join}" + "  \n".on_white
+      display_str << '     ' + "  ".on_white + "#{row.map.with_index { |piece, col_i| print_square(piece, row_i, col_i, cursor_pos) }.to_a.join}" + "  \n".on_white
     end
-    display_str << "                    \n".on_white
-    display_str << "\nIt is #{current_player.capitalize}'s turn."
-    puts display_str.center(25, ' ')
+    display_str << "     " + "                    \n".on_white
+    display_str << "\n      It is #{current_player_color.capitalize}'s turn.\n\n"
+    display_str << "   Move with i, j, k, and l.\n"
+    display_str << "  Spacebar to select a piece,\n"
+    display_str << "  and place it where you like.\n"
+    display_str << "       'q' to quit.\n\n"
+    puts display_str
   end
   
   def print_square(piece, row_i, col_i, cursor_pos)

@@ -1,25 +1,43 @@
 require './pieces.rb'
 require './board.rb'
+require './human_player.rb'
 require 'io/console'
 require 'colorize'
 require 'pry'
+
+class InputError < ArgumentError
+end
 
 class Game
   attr_accessor :board, :cursor_pos
   attr_reader :players
 
-  def initialize
+  def initialize(player1, player2)
     @board = Board.new
     @cursor_pos = [4, 6]
-    @players = [:white, :black]
+    @players = [player1, player2]
+    assign_players_colors
+    show_players_board
   end
   
   def play
-    until board.game_over? do
-      board.display(cursor_pos, current_player)
-      play_turn(current_player)
+    catch :quit do
+      until board.game_over? do
+        board.display(cursor_pos, current_player.color)
+        play_turn
+      end
+      puts "Game over. #{board.winner} won!"
     end
-    puts "Game over. #{board.winner} won!"
+    puts "Thanks for playing!"
+  end
+
+  def assign_players_colors
+    players.first.color = :white
+    players.last.color = :black
+  end
+
+  def show_players_board
+    players.each { |player| player.board = self }
   end
 
   def current_player
@@ -30,25 +48,27 @@ class Game
     players.rotate!
   end
 
-  def play_turn(current_player)
-    source_pos = select_pos
-    dest_pos = select_pos
-    board.move(source_pos, dest_pos, current_player)
+  def play_turn
+    source_pos, dest_pos = current_player.move
+    board.move(source_pos, dest_pos, current_player.color)
     change_turn
   rescue IllegalMoveError => e
-    board.display(cursor_pos, current_player)
+    board.display(cursor_pos, current_player.color)
     puts "#{e.class}: #{e.message}"
     retry
   end
 
-  def cursor_dir(input)
-    case input
+  def cursor_dir(user_input)
+    case user_input
     when 'c' then :up
     when 't' then :down
     when 'h' then :left
     when 'n' then :right
-    when 'b' then :pry
+    when 'q' then throw :quit
+    else raise InputError.new('Unexpected input.')
     end
+  rescue InputError => e
+    puts e.message
   end
 
   def move_cursor(dir)
@@ -66,13 +86,30 @@ class Game
   end
 
   def select_pos
-    until (input = STDIN.getch) == ' '
+    until [' ', 'q'].include?(input = get_input)
       move_cursor(cursor_dir(input))
-      board.display(cursor_pos, current_player)
+      board.display(cursor_pos, current_player.color)
     end
+    throw :quit if input == 'q'
+
     cursor_pos
+  end
+
+  def get_input
+    begin
+      user_input = STDIN.getch
+      unless ['c', 'h', 't', 'n', 'q', ' '].include?(user_input)
+        raise InputError.new('Unexpected input.')
+      end
+    rescue InputError => e
+      puts e.message
+      retry
+    end
+    user_input
   end
 end
 
-game = Game.new
+david = HumanPlayer.new
+eline = HumanPlayer.new
+game = Game.new(david, eline)
 game.play
