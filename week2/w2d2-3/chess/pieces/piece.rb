@@ -22,4 +22,8 @@ class Piece
     board[dest_pos] = self
     self.pos = dest_pos
   end
+
+  def row
+    pos[1]
+  end
 end
