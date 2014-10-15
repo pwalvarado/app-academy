@@ -15,10 +15,11 @@ class Game
   end
   
   def play
-    until false do
+    until board.game_over? do
       board.display(cursor_pos, current_player)
       play_turn(current_player)
     end
+    puts "Game over. #{board.winner} won!"
   end
 
   def current_player

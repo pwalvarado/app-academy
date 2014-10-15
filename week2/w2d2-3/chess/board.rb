@@ -7,7 +7,7 @@ class IllegalMoveError < RuntimeError
 end
 
 class Board
-  attr_accessor :pieces, :captured_pieces
+  attr_accessor :pieces, :captured_pieces, :winner, :loser
   
   def initialize(blank = false)
     @pieces = Array.new(8) { Array.new(8) }
@@ -17,8 +17,6 @@ class Board
   def move(source_pos, dest_pos, current_player)
     piece_to_move = self[source_pos]
     if game_over?
-      winner = ( checkmate?(:black) ? "White" : "Black" )
-      loser = ( checkmate?(:black) ? "Black" : "White" )
       raise IllegalMoveError.new("Game over. #{winner} won. #{loser} lost.")
     elsif piece_to_move.nil?
       raise IllegalMoveError.new('There is no piece to move on that square.')
@@ -29,6 +27,7 @@ class Board
       raise IllegalMoveError.new('Not a valid move destination.')
     else
       move!(source_pos, dest_pos)
+      set_winner if game_over?
     end
   end
 
@@ -39,6 +38,11 @@ class Board
   def move!(source_pos, dest_pos)
     piece = self[source_pos]
     piece.move(dest_pos)
+  end
+
+  def set_winner
+    self.winner = ( checkmate?(:black) ? "White" : "Black" )
+    self.loser = ( checkmate?(:black) ? "Black" : "White" )
   end
 
   def [](pos)
