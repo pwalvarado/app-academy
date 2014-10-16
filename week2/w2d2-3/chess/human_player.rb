@@ -30,7 +30,7 @@ class HumanPlayer
     def get_input
       begin
         user_input = STDIN.getch
-        unless ['c', 'h', 't', 'n', 'q', ' '].include?(user_input)
+        unless ['i', 'j', 'k', 'l', 'q', ' '].include?(user_input)
           raise InputError.new('Unexpected input.')
         end
       rescue InputError
@@ -41,10 +41,10 @@ class HumanPlayer
 
     def cursor_dir(user_input)
       case user_input
-      when 'c' then :up
-      when 't' then :down
-      when 'h' then :left
-      when 'n' then :right
+      when 'i' then :up
+      when 'k' then :down
+      when 'j' then :left
+      when 'l' then :right
       else raise InputError.new('Unexpected input.')
       end
     rescue InputError => e
