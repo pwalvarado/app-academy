@@ -25,6 +25,11 @@ class Game
   def play_turn
     player_move_sequence = get_move_sequence
     make_move(player_move_sequence)
+    promote_kings
+  end
+
+  def promote_kings
+    board.promotables.each { |promotable_piece| promotable_piece.king = true }
   end
 
   def get_move_sequence

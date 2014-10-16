@@ -17,9 +17,14 @@ class Piece
   end
 
   def to_s
-    case color
+    base = case color
     when :black then ' b'
     when :red then ' r'
     end
+    king? ? base.upcase : base
+  end
+
+  def row
+    pos[1]
   end
 end

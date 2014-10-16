@@ -54,6 +54,13 @@ class Board
     pieces[y][x] = piece
   end
 
+  def promotables
+    @pieces.flatten.compact.select do |piece|
+      piece.row == 0 && piece.color == :red ||
+                                      piece.row == 7 && piece.color == :black
+    end
+  end
+
   def piece(old_pos, diff)
     x, y = old_pos
     dx, dy = diff
