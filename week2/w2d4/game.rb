@@ -17,6 +17,7 @@ class Game
       until board.game_over? do
         board.display
         play_turn
+        promote_kings
         change_turn
       end
       puts "Game over. #{board.winner} won!"
@@ -26,7 +27,9 @@ class Game
   def play_turn
     player_move_sequence = get_move_sequence
     make_move(player_move_sequence)
-    promote_kings
+  rescue => e
+    puts e.message
+    retry
   end
 
   def promote_kings
@@ -66,15 +69,18 @@ class Game
   end
 
   def slide(move_sequence)
-    move_piece(*move_sequence) if valid_slide?(move_sequence)
+    check_validity(move_sequence)
+    move_piece(*move_sequence)
   end
 
-  def valid_slide?(move_sequence)
+  def check_validity(move_sequence)
     slider = board[move_sequence.first]
     row_dif = move_sequence.last[1] - move_sequence.first[1]
     col_dif = move_sequence.last[0] - move_sequence.first[0]
     valid_col_difs = [-1, 1]
-    valid_row_difs(slider).include?(row_dif) && valid_col_difs.include?(col_dif)
+    unless valid_row_difs(slider).include?(row_dif) && valid_col_difs.include?(col_dif)
+      raise 'invalid slide'
+    end
   end
 
   def valid_row_difs(slider)
