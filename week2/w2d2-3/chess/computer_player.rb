@@ -14,14 +14,10 @@ class ComputerPlayer
   end
 
   def move
-    sleep(1)
-    all_moves = []
-    board.team_pieces(color).each do |piece|
-      piece.valid_moves.each do |move|
-        all_moves << [piece.pos, move]
-      end
-    end
-    capturing_moves = all_moves.select do |move|
+    sleep(1) # don't want computer turn to be instantaneous
+
+    moves = available_moves
+    capturing_moves = moves.select do |move|
       dest = move.last
       !board[dest].nil? && board[dest].color != self.color
     end
@@ -32,6 +28,24 @@ class ComputerPlayer
     end
     return sorted_capturing_moves.last unless sorted_capturing_moves.empty?
 
-    all_moves.sample
+    moves.sample
   end
+
+  def cursor_pos
+    nil
+  end
+
+  private
+
+    def available_moves
+      all_moves = []
+
+      board.team_pieces(color).each do |piece|
+        piece.valid_moves.each do |move|
+          all_moves << [piece.pos, move]
+        end
+      end
+
+      all_moves
+    end
 end

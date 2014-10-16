@@ -1,5 +1,9 @@
 class HumanPlayer
-  attr_accessor :name, :color, :board
+  attr_accessor :name, :color, :board, :cursor_pos
+
+  def initialize()
+    @cursor_pos = [4, 4]
+  end
 
   def set_name(player_number)
     puts "Player #{player_number}, you will be #{color.capitalize}."
@@ -12,15 +16,15 @@ class HumanPlayer
   end
 
   private
-  
+
     def select_pos
       until [' ', 'q'].include?(input = get_input)
-        board.move_cursor(cursor_diff(cursor_dir(input)))
-        board.display(color, name)
+        move_cursor(cursor_diff(cursor_dir(input)))
+        board.display(color, name, cursor_pos)
       end
       throw :quit if input == 'q'
 
-      board.cursor_pos
+      cursor_pos
     end
 
     def get_input
@@ -54,5 +58,11 @@ class HumanPlayer
       when :right then [1, 0]
       when :left then [-1, 0]
       end
+    end
+
+    def move_cursor(diff)
+      dx, dy = diff
+      new_cursor_pos = [cursor_pos[0] + dx, cursor_pos[1] + dy]
+      self.cursor_pos = new_cursor_pos unless board.offboard?(new_cursor_pos)
     end
 end
