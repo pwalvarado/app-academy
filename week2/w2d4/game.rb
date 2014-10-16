@@ -2,6 +2,7 @@ require './piece.rb'
 require './board.rb'
 require 'io/console'
 require 'colorize'
+require 'pry'
 
 class BadMoveError < RuntimeError
 end
@@ -49,18 +50,13 @@ class Game
     until moves[-2] && moves[-1] && moves[-2] == moves[-1]
       moves << select_pos
     end
-    moves[0..-2] # last move is a duplicate from 'locking in' the sequence
+    moves[0..-2] # ignore last move (duplicate from 'locking in' the sequence)
   end
 
   def make_move(move_sequence)
-    pos1 = move_sequence[0]
-    pos2 = move_sequence[1]
-    dx = pos2[0] - pos1[0]
-    dy = pos2[1] - pos1[1]
-    if dx.abs == 1 && dy.abs == 1 && move_sequence.size == 2
-      slide(move_sequence)
-    else
-      jumps(move_sequence)
+    case move_type(move_sequence)
+    when :slide then slide(move_sequence)
+    when :jump then jumps(move_sequence)
     end
   end
 
@@ -76,11 +72,27 @@ class Game
     move_piece(*move_sequence)
   end
 
+  def move_type(move_sequence)
+    pos1 = move_sequence[0]
+    pos2 = move_sequence[1]
+    dx = pos2[0] - pos1[0]
+    dy = pos2[1] - pos1[1]
+    ( dx.abs == 1 && dy.abs == 1 && move_sequence.size == 2 ) ? :slide : :jump
+  end
+
   def check_validity(move_sequence)
+    if mover(move_sequence).nil?
+      raise BadMoveError.new("can't move empty square")
+    end
     if !correct_piece_color?(move_sequence)
       raise BadMoveError.new('move your own pieces')
-    elsif !valid_slide?(move_sequence)
+    end
+    type = move_type(move_sequence)
+    if type == :slide && !valid_slide?(move_sequence)
       raise BadMoveError.new('invalid slide')
+    end
+    if type == :jump
+      check_jump_validity
     end
   end
 
@@ -100,6 +112,16 @@ class Game
     valid_row_difs(slider).include?(row_dif) && valid_col_difs.include?(col_dif)
   end
 
+  def check_jump_validity(jump_start, jump_end)
+    jumped = jumped_piece(jump_start, jump_end)
+    unless jumped
+      raise BadMoveError.new("can't jump empty square")
+    end
+    if jumped.color == current_player
+      raise BadMoveError.new("don't jump your own piece")
+    end
+  end
+
   def valid_row_difs(slider)
     case
     when slider.black? && !slider.king? then [1]
@@ -117,6 +139,7 @@ class Game
   end
 
   def jump(jump_start, jump_end)
+    check_jump_validity(jump_start, jump_end)
     board[ jumped_pos(jump_start, jump_end) ] = nil
     move_piece(jump_start, jump_end)
   end
@@ -125,6 +148,10 @@ class Game
     # average the start and end coordinates for both x and y
     [ (jump_start[0] + jump_end[0]) / 2,
         (jump_start[1] + jump_end[1]) / 2]
+  end
+
+  def jumped_piece(jump_start, jump_end)
+    board[jumped_pos(jump_start, jump_end)]
   end
 
   def current_player
