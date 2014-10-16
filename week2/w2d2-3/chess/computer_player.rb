@@ -1,4 +1,5 @@
 VALUE = {
+  :king => 1_000_000.0,
   :queen => 9.0,
   :rook => 5.0,
   :bishop => 3.15,
