@@ -27,4 +27,12 @@ class Piece
   def row
     pos[1]
   end
+
+  def black?
+    color == :black
+  end
+
+  def red?
+    color == :red
+  end
 end

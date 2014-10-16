@@ -17,6 +17,7 @@ class Game
       until board.game_over? do
         board.display
         play_turn
+        change_turn
       end
       puts "Game over. #{board.winner} won!"
     end
@@ -65,8 +66,23 @@ class Game
   end
 
   def slide(move_sequence)
-    start, ending = move_sequence
-    move_piece(start, ending)
+    move_piece(*move_sequence) if valid_slide?(move_sequence)
+  end
+
+  def valid_slide?(move_sequence)
+    slider = board[move_sequence.first]
+    row_dif = move_sequence.last[1] - move_sequence.first[1]
+    col_dif = move_sequence.last[0] - move_sequence.first[0]
+    valid_col_difs = [-1, 1]
+    valid_row_difs(slider).include?(row_dif) && valid_col_difs.include?(col_dif)
+  end
+
+  def valid_row_difs(slider)
+    case
+    when slider.black? && !slider.king? then [1]
+    when slider.red? && !slider.king? then [-1]
+    when slider.king? then [-1, 1]
+    end
   end
 
   def jumps(move_sequence)
