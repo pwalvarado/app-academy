@@ -18,19 +18,21 @@ class Pawn < SteppingPiece
   end
 
   def white_non_attacks
-    non_attacks = case row
-    when 6 then [[0, -1], [0, -2]]
-    else [[0, -1]]
+    non_attacks = []
+    non_attacks << [0, -1] if board.piece(pos, [0, -1]).nil?
+    if row == 6
+      non_attacks << [0, -2] if board.piece(pos, [0, -1]).nil? && board.piece(pos, [0, -2]).nil?
     end
-    non_attacks.select { |diff| board.piece(pos, diff).nil? }
+    non_attacks
   end
 
   def black_non_attacks
-    non_attacks = case row
-    when 1 then [[0, 1], [0, 2]]
-    else [[0, 1]]
+    non_attacks = []
+    non_attacks << [0, 1] if board.piece(pos, [0, 1]).nil?
+    if row == 1
+      non_attacks << [0, 2] if board.piece(pos, [0, 1]).nil? && board.piece(pos, [0, 2]).nil?
     end
-    non_attacks.select { |diff| board.piece(pos, diff).nil? }
+    non_attacks
   end
 
   def white_attacks

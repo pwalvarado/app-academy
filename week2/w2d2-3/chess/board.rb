@@ -80,7 +80,7 @@ class Board
   end
 
   def checkmate?(color)
-    team_pieces(color).all? { |piece| piece.valid_moves.empty? }
+    in_check?(color) && team_pieces(color).all? { |piece| piece.valid_moves.empty? }
   end
 
   def opp_color(color)
