@@ -6,8 +6,8 @@ Partner: Adam Berman
 
 Focus:
 
-* Serialization, persistence, YAML
-* Class design, method design
+* serialization, persistence, YAML
+* class design, method design
 
 Days 2 and 3
 ---
