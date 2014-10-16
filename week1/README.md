@@ -6,10 +6,10 @@ Partner: Anastasia Zorko
 
 Focus:
 
-* Arrays
-* Hashes
-* Enumerable
-* Strings
+* arrays
+* hashes
+* enumerable
+* strings
 
 Day 2
 ---
@@ -21,11 +21,11 @@ Partner: Matt Graser
 
 Focus:
 
-* Methods
-* File I/O
-* Symobls, options hashes
-* Iteration/Loops
-* Classes
+* methods
+* file I/O
+* symobls, options hashes
+* iteration/Loops
+* classes
 
 Day 3
 ---
@@ -37,8 +37,8 @@ Partner: Adam Berman
 
 Focus:
 
-* Class design, class interactions
-* Method design (brief and focused: 28 out of 37 methods in hangman.rb are one or two lines)
+* class design, class interactions
+* method design (brief and focused: 28 out of 37 methods in hangman.rb are one or two lines)
 
 Day 4
 ---
@@ -48,8 +48,8 @@ Partner: Aaron Hurley
 
 Focus:
 
-* Blocks, procs, and lambdas
-* Recursion
+* blocks, procs, and lambdas
+* recursion
 
 Day 5
 ---
@@ -59,7 +59,7 @@ Partner: Mark Doss
 
 Focus:
 
-* Tree data structures
-* Breadth-first search (BFS)
-* Depth-first search (DFS)
-* Recursion
+* tree data structures
+* breadth-first search
+* depth-first search
+* recursion
