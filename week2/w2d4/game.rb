@@ -28,7 +28,7 @@ class Game
   def play_turn
     move_sequence = get_move_sequence    
     moving_piece = mover(move_sequence)
-    check_basic_move_conditions(moving_piece)
+    check_basic_move_conditions(moving_piece, move_sequence.last)
     destinations = move_sequence.drop(1)
     moving_piece.move(destinations)
   rescue BadMoveError => e
@@ -36,12 +36,15 @@ class Game
     retry
   end
 
-  def check_basic_move_conditions(moving_piece)
+  def check_basic_move_conditions(moving_piece, final_dest)
     if moving_piece.nil?
       raise BadMoveError.new("can't move empty square")
     end
     if moving_piece.color != current_player
       raise BadMoveError.new('move your own piece')
+    end
+    if !board[final_dest].nil?
+      raise BadMoveError.new("can't move onto a piece")
     end
   end
 
