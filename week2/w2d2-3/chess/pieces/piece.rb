@@ -1,5 +1,4 @@
 # encoding: utf-8
-require 'pry'
 
 class Piece
   attr_accessor :pos, :color

@@ -4,7 +4,6 @@ require './human_player.rb'
 require './computer_player.rb'
 require 'io/console'
 require 'colorize'
-require 'pry'
 
 class InputError < ArgumentError
 end
@@ -13,7 +12,7 @@ class Game
   attr_accessor :board
   attr_reader :players
 
-  def initialize(player1, player2)
+  def initialize
     @board = Board.new
     @players = setup_players
     assign_players_colors
@@ -84,7 +83,5 @@ class Game
   end
 end
 
-human_player = HumanPlayer.new
-computer_player = ComputerPlayer.new
-game = Game.new(human_player, computer_player)
+game = Game.new
 game.play
