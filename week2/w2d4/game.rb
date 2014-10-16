@@ -3,6 +3,9 @@ require './board.rb'
 require 'io/console'
 require 'colorize'
 
+class BadMoveError < RuntimeError
+end
+
 class Game
   attr_accessor :board, :turns
   attr_reader :players
@@ -27,7 +30,7 @@ class Game
   def play_turn
     player_move_sequence = get_move_sequence
     make_move(player_move_sequence)
-  rescue => e
+  rescue BadMoveError => e
     puts e.message
     retry
   end
@@ -74,13 +77,27 @@ class Game
   end
 
   def check_validity(move_sequence)
-    slider = board[move_sequence.first]
+    if !correct_piece_color?(move_sequence)
+      raise BadMoveError.new('move your own pieces')
+    elsif !valid_slide?(move_sequence)
+      raise BadMoveError.new('invalid slide')
+    end
+  end
+
+  def correct_piece_color?(move_sequence)
+    mover(move_sequence).color == current_player
+  end
+
+  def mover(move_sequence)
+    board[move_sequence.first]
+  end
+
+  def valid_slide?(move_sequence)
+    slider = mover(move_sequence)
     row_dif = move_sequence.last[1] - move_sequence.first[1]
     col_dif = move_sequence.last[0] - move_sequence.first[0]
     valid_col_difs = [-1, 1]
-    unless valid_row_difs(slider).include?(row_dif) && valid_col_difs.include?(col_dif)
-      raise 'invalid slide'
-    end
+    valid_row_difs(slider).include?(row_dif) && valid_col_difs.include?(col_dif)
   end
 
   def valid_row_difs(slider)
