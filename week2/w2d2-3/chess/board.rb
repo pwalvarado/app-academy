@@ -100,7 +100,7 @@ class Board
   end
   
   def set_board
-    # black power row
+    # black back row
     self[[0, 0]] = Rook.new(self, [0, 0], :black)
     self[[1, 0]] = Knight.new(self, [1, 0], :black)
     self[[2, 0]] = Bishop.new(self, [2, 0], :black)
@@ -114,7 +114,7 @@ class Board
       self[[pawn_col, 1]] = Pawn.new(self, [pawn_col, 1], :black)
     end
       
-    # white power row
+    # white back row
     self[[0, 7]] = Rook.new(self, [0, 7], :white)
     self[[1, 7]] = Knight.new(self, [1, 7], :white)
     self[[2, 7]] = Bishop.new(self, [2, 7], :white)
