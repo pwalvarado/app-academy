@@ -9,7 +9,7 @@ Focus:
 * Serialization, persistence, YAML
 * Class design, method design
 
-Day 2 (and 3)
+Days 2 and 3
 ---
 **Main Project**: Chess
 
@@ -19,3 +19,4 @@ Focus:
 
 * class inheritance
 * raising & handling errors
+* deep duping a complex object
