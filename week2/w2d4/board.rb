@@ -29,7 +29,7 @@ class Board
       when (0..2) then :black
       when (5..7) then :red
       end
-      Piece.new(pos, color)
+      Piece.new(pos, color, self)
     end
   end
 
@@ -54,13 +54,6 @@ class Board
     pieces[y][x] = piece
   end
 
-  def promotables
-    @pieces.flatten.compact.select do |piece|
-      piece.row == 0 && piece.color == :red ||
-                                      piece.row == 7 && piece.color == :black
-    end
-  end
-
   def piece(old_pos, diff)
     x, y = old_pos
     dx, dy = diff
@@ -76,11 +69,12 @@ class Board
     pieces.flatten.compact.select { |piece| piece.color == color }
   end
   
-  def display
+  def display(current_player)
     system("clear")
     pieces.each_with_index do |row, y|
       puts row.map.with_index { |square, x| print(square, [x, y]) }.join
     end
+    puts "#{current_player}, it's your turn."
   end
   
   def print(square, pos)

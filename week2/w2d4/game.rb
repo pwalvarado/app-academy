@@ -1,11 +1,9 @@
-require './piece.rb'
-require './board.rb'
+$LOAD_PATH << '.'
+require 'piece'
+require 'board'
 require 'io/console'
 require 'colorize'
 require 'pry'
-
-class BadMoveError < RuntimeError
-end
 
 class Game
   attr_accessor :board, :turns
@@ -19,9 +17,8 @@ class Game
   def play
     catch :quit do
       until board.game_over? do
-        board.display
+        board.display(current_player)
         play_turn
-        promote_kings
         change_turn
       end
       puts "Game over. #{board.winner} won!"
@@ -29,129 +26,35 @@ class Game
   end
 
   def play_turn
-    player_move_sequence = get_move_sequence
-    make_move(player_move_sequence)
+    move_sequence = get_move_sequence    
+    moving_piece = mover(move_sequence)
+    check_basic_move_conditions(moving_piece)
+    destinations = move_sequence.drop(1)
+    moving_piece.move(destinations)
   rescue BadMoveError => e
     puts e.message
     retry
   end
 
-  def promote_kings
-    board.promotables.each { |promotable_piece| promotable_piece.king = true }
-  end
-
-  def get_move_sequence
-    puts "#{current_player}, it's your turn."
-    input_move_sequence
-  end
-
-  def input_move_sequence
-    moves = []
-    until moves[-2] && moves[-1] && moves[-2] == moves[-1]
-      moves << select_pos
-    end
-    moves[0..-2] # ignore last move (duplicate from 'locking in' the sequence)
-  end
-
-  def make_move(move_sequence)
-    case move_type(move_sequence)
-    when :slide then slide(move_sequence)
-    when :jump then jumps(move_sequence)
-    end
-  end
-
-  def move_piece(start, ending)
-    piece = board[start]
-    piece.pos = ending
-    board[start] = nil
-    board[ending] = piece
-  end
-
-  def slide(move_sequence)
-    check_validity(move_sequence)
-    move_piece(*move_sequence)
-  end
-
-  def move_type(move_sequence)
-    pos1 = move_sequence[0]
-    pos2 = move_sequence[1]
-    dx = pos2[0] - pos1[0]
-    dy = pos2[1] - pos1[1]
-    ( dx.abs == 1 && dy.abs == 1 && move_sequence.size == 2 ) ? :slide : :jump
-  end
-
-  def check_validity(move_sequence)
-    if mover(move_sequence).nil?
+  def check_basic_move_conditions(moving_piece)
+    if moving_piece.nil?
       raise BadMoveError.new("can't move empty square")
     end
-    if !correct_piece_color?(move_sequence)
-      raise BadMoveError.new('move your own pieces')
+    if moving_piece.color != current_player
+      raise BadMoveError.new('move your own piece')
     end
-    type = move_type(move_sequence)
-    if type == :slide && !valid_slide?(move_sequence)
-      raise BadMoveError.new('invalid slide')
-    end
-    if type == :jump
-      check_jump_validity
-    end
-  end
-
-  def correct_piece_color?(move_sequence)
-    mover(move_sequence).color == current_player
   end
 
   def mover(move_sequence)
     board[move_sequence.first]
   end
 
-  def valid_slide?(move_sequence)
-    slider = mover(move_sequence)
-    row_dif = move_sequence.last[1] - move_sequence.first[1]
-    col_dif = move_sequence.last[0] - move_sequence.first[0]
-    valid_col_difs = [-1, 1]
-    valid_row_difs(slider).include?(row_dif) && valid_col_difs.include?(col_dif)
-  end
-
-  def check_jump_validity(jump_start, jump_end)
-    jumped = jumped_piece(jump_start, jump_end)
-    unless jumped
-      raise BadMoveError.new("can't jump empty square")
+  def get_move_sequence
+    moves = []
+    until moves[-2] && moves[-1] && moves[-2] == moves[-1]
+      moves << select_pos
     end
-    if jumped.color == current_player
-      raise BadMoveError.new("don't jump your own piece")
-    end
-  end
-
-  def valid_row_difs(slider)
-    case
-    when slider.black? && !slider.king? then [1]
-    when slider.red? && !slider.king? then [-1]
-    when slider.king? then [-1, 1]
-    end
-  end
-
-  def jumps(move_sequence)
-    move_sequence.each_with_index do |jump_start, i|
-      next if i == move_sequence.length - 1
-      jump_end = move_sequence[i + 1]
-      jump(jump_start, jump_end)
-    end
-  end
-
-  def jump(jump_start, jump_end)
-    check_jump_validity(jump_start, jump_end)
-    board[ jumped_pos(jump_start, jump_end) ] = nil
-    move_piece(jump_start, jump_end)
-  end
-
-  def jumped_pos(jump_start, jump_end)
-    # average the start and end coordinates for both x and y
-    [ (jump_start[0] + jump_end[0]) / 2,
-        (jump_start[1] + jump_end[1]) / 2]
-  end
-
-  def jumped_piece(jump_start, jump_end)
-    board[jumped_pos(jump_start, jump_end)]
+    moves[0..-2] # ignore last move (duplicate from 'locking in' the sequence)
   end
 
   def current_player
@@ -165,7 +68,7 @@ class Game
   def select_pos
     until [' ', 'q'].include?(input = get_input)
       move_cursor(cursor_diff(cursor_dir(input)))
-      board.display
+      board.display(current_player)
     end
     throw :quit if input == 'q'
 
