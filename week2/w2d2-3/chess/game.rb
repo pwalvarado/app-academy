@@ -42,6 +42,7 @@ class Game
   end
 
   def setup_player_names
+    system('clear')
     players.each_with_index { |player, player_i| player.set_name(player_i + 1) }
   end
 
