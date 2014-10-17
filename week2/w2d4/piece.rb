@@ -33,6 +33,22 @@ class Piece
     king? ? base.upcase : base
   end
 
+  def has_move?
+    has_jump? || has_slide?
+  end
+
+  def has_jump?
+    valid_jump_dys.each do |jump_dy|
+      [-2, 2].each do |jump_dx|
+        if jump_allowed?(pos, [jump_dx, jump_dy])
+          return true
+        end
+      end
+    end
+
+    false
+  end
+
   private
 
     def slide(dest)
@@ -42,6 +58,9 @@ class Piece
     def valid_slide?(dest)
       if !valid_slide_dys.include?( dy(dest) )
         raise BadMoveError.new("that piece isn't a king")
+      end
+      if board.jump_available?(color)
+        raise BadMoveError.new('must jump when possible')
       end
 
       true
@@ -107,22 +126,16 @@ class Piece
 
     def jump_allowed?(pos, diff)
       dx, dy = diff
+      new_pos = [pos[0] + dx, pos[1] + dy]
       valid_jump_dys.include?(dy) &&
-          board.piece(pos, diff).nil? &&
+          board.valid?(new_pos) &&
+          board[new_pos].nil? &&
           board.piece(pos, [dx / 2, dy / 2]) &&
           board.piece(pos, [dx / 2, dy / 2]).color != color
     end
 
-    def jump_available?
-      valid_jump_dys.each do |jump_dy|
-        [-2, 2].each do |jump_dx|
-          if jump_allowed?(pos, [jump_dx, jump_dy])
-            return true
-          end
-        end
-      end
-
-      false
+    def has_slide?
+      true # TO DO
     end
 
     def valid_slide_dys

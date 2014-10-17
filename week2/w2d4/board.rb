@@ -5,11 +5,12 @@ require 'piece'
 require 'colorize'
 
 class Board
-  attr_accessor :pieces, :cursor_pos, :winner, :loser
+  attr_accessor :pieces, :cursor_pos, :winner
   
   def initialize
     @pieces = initial_board
     @cursor_pos = [3, 5]
+    @winner = nil
   end
 
   def initial_board
@@ -34,12 +35,16 @@ class Board
   end
 
   def game_over?
-    win? # || draw?
+    win? || draw?
   end
 
   def win?
     [:red, :black].each do |color|
       if team_pieces( opp_color(color) ).empty?
+        self.winner = color
+        return true
+      elsif team_pieces( opp_color(color) ).none?(&:has_move?) &&
+                team_pieces(color).any?(&:has_move?)
         self.winner = color
         return true
       end
@@ -49,7 +54,9 @@ class Board
   end
 
   def draw?
-    # TO DO
+    [:red, :black].all? do |color|
+      team_pieces(color).none?(&:has_move?)
+    end
   end
 
   def set_winner
@@ -82,6 +89,10 @@ class Board
 
   def team_pieces(color)
     pieces.flatten.compact.select { |piece| piece.color == color }
+  end
+
+  def jump_available?(color)
+    team_pieces(color).any?(&:has_jump?)
   end
   
   def display(current_player = nil)

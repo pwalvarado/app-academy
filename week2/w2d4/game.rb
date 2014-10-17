@@ -22,7 +22,15 @@ class Game
         change_turn
       end
       board.display
+      display_winner_message
+    end
+  end
+
+  def display_winner_message
+    if board.winner
       puts "Game over. #{board.winner.capitalize} won!"
+    else
+      puts "It's a draw."
     end
   end
 
