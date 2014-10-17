@@ -20,7 +20,7 @@ class Piece
     case move_type(dest_poss.first)
     when :slide then slide(dest_poss.first)
     when :jump then jumps(dest_poss)
-    else raise BadMoveError.new('either slide or jump')
+    else raise BadMoveError.new('must slide or jump')
     end
     maybe_promote
   end
