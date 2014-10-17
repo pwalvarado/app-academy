@@ -48,26 +48,35 @@ class Piece
     end
 
     def jumps(dests)
-      if !valid_jumps?(dests)
+      if dests.count > 1 && !valid_jumps?(dests)
         raise BadMoveError.new('invalid jump sequence')
       end
 
-      dests.each { |dest| jump(dest) }
+      dests.each { |dest| jump(dest) if valid_jump?(dest) }
 
     end
 
     def jump(dest)
-      check_jump_validity(dest)
       board[ jumped_pos(pos, dest) ] = nil
       teleport(dest)
     end
 
     def valid_jumps?(dests)
-      dests.each do |dest|
-        last_dest 
-      end
+      poss = [pos] + dests
+      jump_pairs(poss).all? { |jump_pair| valid_jump_pair?(jump_pair) }
+    end
 
-      true
+    def jump_pairs(poss)
+      poss.map.with_index do |pos, i|
+        next if i == poss.size - 1
+        [pos, poss[i + 1]]
+      end[0...-1]
+    end
+
+    def valid_jump_pair?(jump_pair)
+      start, ending = jump_pair.first, jump_pair.last
+      dy = ending[1] - start[1]
+      valid_jump_dys.include?(dy)
     end
 
     def teleport(dest)
