@@ -5,6 +5,9 @@ require 'io/console'
 require 'colorize'
 require 'pry'
 
+class InputError < RuntimeError
+end
+
 class Game
   attr_accessor :board, :turns
   attr_reader :players

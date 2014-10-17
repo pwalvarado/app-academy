@@ -71,8 +71,11 @@ class Piece
         raise BadMoveError.new('invalid jump sequence')
       end
 
-      dests.each { |dest| jump(dest) if valid_jump?(dest) }
-
+      dests.each_with_index do |dest, i|
+        jump(dest) if valid_jump?(dest)
+        board.display
+        sleep(0.7) unless i == dests.size - 1
+      end
     end
 
     def jump(dest)
@@ -120,6 +123,9 @@ class Piece
       if jumped.color == color
         raise BadMoveError.new("don't jump your own piece")
       end
+      unless has_jump?
+        raise BadMoveError.new("that's not a legal jump")
+      end
 
       true
     end
@@ -135,7 +141,13 @@ class Piece
     end
 
     def has_slide?
-      true # TO DO
+      valid_slide_dys.each do |dy|
+        [-1, 1].each do |dx|
+          return true if board.piece(pos, [dx, dy]).nil?
+        end
+      end
+
+      false
     end
 
     def valid_slide_dys

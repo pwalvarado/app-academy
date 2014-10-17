@@ -59,11 +59,6 @@ class Board
     end
   end
 
-  def set_winner
-    # self.winner = 
-    # self.loser = 
-  end
-
   def [](pos)
     x = pos[0]
     y = pos[1]
