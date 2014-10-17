@@ -34,6 +34,21 @@ class Board
   end
 
   def game_over?
+    win? # || draw?
+  end
+
+  def win?
+    [:red, :black].each do |color|
+      if pieces.flatten.compact.all? { |piece| piece.color == color }
+        self.winner = color
+        return true
+      end
+    end
+
+    false
+  end
+
+  def draw?
     # TO DO
   end
 
@@ -69,12 +84,12 @@ class Board
     pieces.flatten.compact.select { |piece| piece.color == color }
   end
   
-  def display(current_player)
+  def display(current_player = nil)
     system("clear")
     pieces.each_with_index do |row, y|
       puts row.map.with_index { |square, x| print(square, [x, y]) }.join
     end
-    puts "#{current_player}, it's your turn."
+    puts "#{current_player}, it's your turn." if current_player
   end
   
   def print(square, pos)

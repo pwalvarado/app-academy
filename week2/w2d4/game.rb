@@ -21,7 +21,8 @@ class Game
         play_turn
         change_turn
       end
-      puts "Game over. #{board.winner} won!"
+      board.display
+      puts "Game over. #{board.winner.capitalize} won!"
     end
   end
 
