@@ -75,8 +75,9 @@ class Piece
 
     def valid_jump_pair?(jump_pair)
       start, ending = jump_pair.first, jump_pair.last
+      dx = ending[0] - start[0]
       dy = ending[1] - start[1]
-      valid_jump_dys.include?(dy)
+      jump_allowed?(start, [dx, dy])
     end
 
     def teleport(dest)
@@ -104,6 +105,26 @@ class Piece
       true
     end
 
+    def jump_allowed?(pos, diff)
+      dx, dy = diff
+      valid_jump_dys.include?(dy) &&
+          board.piece(pos, diff).nil? &&
+          board.piece(pos, [dx / 2, dy / 2]) &&
+          board.piece(pos, [dx / 2, dy / 2]).color != color
+    end
+
+    def jump_available?
+      valid_jump_dys.each do |jump_dy|
+        [-2, 2].each do |jump_dx|
+          if jump_allowed?(pos, [jump_dx, jump_dy])
+            return true
+          end
+        end
+      end
+
+      false
+    end
+
     def valid_slide_dys
       case
       when black? && !king? then [1]
@@ -113,11 +134,7 @@ class Piece
     end
 
     def valid_jump_dys
-      case
-      when black? && !king? then [2]
-      when red? && !king? then [-2]
-      when king? then [-2, 2]
-      end
+      valid_slide_dys.map { |dy| dy * 2 }
     end
 
     def move_type(dest)

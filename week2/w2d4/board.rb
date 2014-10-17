@@ -39,7 +39,7 @@ class Board
 
   def win?
     [:red, :black].each do |color|
-      if pieces.flatten.compact.all? { |piece| piece.color == color }
+      if team_pieces( opp_color(color) ).empty?
         self.winner = color
         return true
       end
