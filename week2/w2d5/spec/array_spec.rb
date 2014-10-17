@@ -1,6 +1,9 @@
-Rspec.describe Array do
-  subject(:uniq_array) { [1, 2, 1, 3, 3].my_uniq }
+require 'rspec'
+require 'array'
+
+RSpec.describe Array do
   describe "#my_uniq" do
+    subject(:uniq_array) { [1, 2, 1, 3, 3].my_uniq }
     
     it 'returns an array' do
       expect(uniq_array).to be_an(Array)
@@ -23,5 +26,38 @@ Rspec.describe Array do
       index2 = uniq_array.index(2)
       expect(index1).to be < index2
     end
+  end
+  
+  describe "#two_sum" do
+    subject(:target_array) { [-1, 0, 2, -2, 1] }
+    
+    it 'returns an array' do
+      expect(target_array.two_sum).to be_an(Array)
+    end
+    
+    context 'handles a basic case' do
+      subject(:target_array) { [-1, 2, -2, 1] }
+      
+      it 'returns the correct index pairs' do
+        expect(target_array.two_sum).to eq([[0, 3],[1, 2]])
+      end
+    end
+    
+    context "handles a case with zero" do
+      subject(:target_array) { [-1, 2, 0, -2, 1] }
+      
+      it "doesn't double on zero" do
+        expect(target_array.two_sum).not_to include([2, 2])
+      end
+    end
+    
+    context "handles no matches" do
+      subject(:target_array) { [-1, 2, 0] }
+      
+      it 'returns empty array' do
+        expect(target_array.two_sum).to eq([])
+      end
+    end
+    
   end
 end
