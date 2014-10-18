@@ -32,3 +32,14 @@ Focus:
 
 * modules
 * error handling
+
+Day 5
+---
+**Main Project**: Poker (TDD)
+
+Partner: Minsoo Kim
+
+Focus:
+
+* RSpec
+* test-driven development
