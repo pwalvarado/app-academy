@@ -16,4 +16,22 @@ class Hand
     p cards
   end
   
+  def value
+    # high_c? then 0
+    # one_pair? then 20
+    
+  end
+  
+  def ranks
+    @cards.map {|card| card.rank}.uniq
+  end
+  
+  def suits
+    @cards.map {|card| card.suit}.uniq
+  end
+  
+  def consecutive?
+    ranks.count == 5 && 
+      Card::RANKS[cards.first.rank] + 4 == Card::RANKS[cards.last.rank]
+  end
 end

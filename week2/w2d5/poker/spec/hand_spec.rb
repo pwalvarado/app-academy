@@ -1,4 +1,5 @@
 require 'hand'
+require 'spec_helper'
 
 RSpec.describe Hand do
   subject(:hand) { Hand.new(Deck.new) }
@@ -54,8 +55,8 @@ RSpec.describe Hand do
   
   describe "#value" do
     it 'correctly values a high card' do
-      card.rank = :
-      expect().
+      hand.instance_variable_set(:@cards, hand_cards('5h4d3c2dAs'))
+      expect(hand.value).to eq(14)
     end
     it 'correctly values a pair' do
     end

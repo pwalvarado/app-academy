@@ -21,4 +21,27 @@ def card_arrays(deck)
   deck.cards.map do |card|
     [card.suit, card.rank]
   end
-end 
+end
+
+SUIT_CHARS = Hash['h', :heart, 'c', :club, 's', :spade, 'd', :diamond]
+RANK_CHARS = Hash[
+  '2', :two,
+  '3', :three,
+  '4', :four,
+  '5', :five,
+  '6', :six,
+  '7', :seven,
+  '8', :eight,
+  '9', :nine,
+  'T', :ten,
+  'J', :jack,
+  'Q', :queen,
+  'K', :king,
+  'A', :ace
+]
+
+def hand_cards(cards_string)
+  cards_string.scan(/.{2}/).map do |code|
+    Card.new( SUIT_CHARS[code[1]] , RANK_CHARS[code[0]] )
+  end
+end
