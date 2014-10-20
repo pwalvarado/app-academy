@@ -26,7 +26,7 @@ Day 4
 ---
 **Main Project**: Checkers
 
-Partner: solo day
+Partner: none (solo day)
 
 Focus:
 
