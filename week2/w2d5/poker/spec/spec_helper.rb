@@ -40,7 +40,7 @@ RANK_CHARS = Hash[
   'A', :ace
 ]
 
-def hand_cards(cards_string)
+def cards(cards_string)
   cards_string.scan(/.{2}/).map do |code|
     Card.new( SUIT_CHARS[code[1]] , RANK_CHARS[code[0]] )
   end

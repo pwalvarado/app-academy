@@ -1,6 +1,4 @@
 class Card
-  include Comparable
-  
   attr_reader :suit, :rank
   
   SUITS = [:heart, :club, :spade, :diamond]
@@ -26,4 +24,7 @@ class Card
     @rank = rank
   end
 
+  def rank_value
+    RANKS[rank]
+  end
 end
