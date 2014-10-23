@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+
+class CLI
+  def run
+    user = User.find_by(email: get_email)
+    action = get_action
+    case action
+    when 0 then create_short_url(user)
+    when 1 then visit_short_url(user)
+    else raise 'invalid option'
+    end
+  rescue => e
+    puts e.message
+    retry
+  end
+  
+  private
+  def get_email
+    puts "Input your email"
+    gets.chomp
+  end
+  
+  def get_action
+    puts "What do you want to do?"
+    puts "0. Create shortened URL"
+    puts "1. Visit shortened URL"
+    Integer(gets.chomp)
+  end
+  
+  def create_short_url(user)
+    puts 'Type in your long url'
+    long_url = gets.chomp
+    new_record = ShortenedUrl.create_for_user_and_long_url!(user, long_url)
+    puts "Short url is: #{new_record.short_url}"
+  end
+  
+  def visit_short_url(user)
+    puts "Type in the shortened URL"
+    shortened_url = ShortenedUrl.find_by(short_url: gets.chomp)
+    Visit.record_visit!(user, shortened_url)
+    Launchy.open(shortened_url.long_url)
+  end
+end
+
+cli = CLI.new
+cli.run
