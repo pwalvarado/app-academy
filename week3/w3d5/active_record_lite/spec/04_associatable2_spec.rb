@@ -69,10 +69,15 @@ describe 'Associatable' do
       expect(cat).to respond_to(:home)
     end
 
-    it 'fetches associated `home` for a `Cat`' do
+    it 'fetches associated `House` for a `Cat`' do
       house = cat.home
 
       expect(house).to be_instance_of(House)
+    end
+
+    it 'fetches correct `home` for a `Cat`' do
+      house = cat.home
+
       expect(house.address).to eq('26th and Guerrero')
     end
   end
