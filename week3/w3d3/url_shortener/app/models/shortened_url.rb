@@ -42,7 +42,7 @@ class ShortenedUrl < ActiveRecord::Base
   )
   
   has_many(
-    :tag_topics
+    :tag_topics,
     :through => :taggings,
     :source => :tag_topic
   )
