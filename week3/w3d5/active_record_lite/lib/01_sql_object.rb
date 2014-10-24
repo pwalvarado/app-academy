@@ -1,9 +1,8 @@
 require_relative 'db_connection'
 require 'active_support/inflector'
-# NB: the attr_accessor we wrote in phase 0 is NOT used in the rest
-# of this project. It was only a warm up.
 
 class SQLObject
+  # array of attributes/columns as symbols
   def self.columns
     DBConnection.execute2(<<-SQL).first.map(&:to_sym)
       SELECT
@@ -40,7 +39,7 @@ class SQLObject
   def self.all
     parse_all(DBConnection.execute(<<-SQL))
     SELECT
-      #{table_name}.*
+      *
     FROM
       #{table_name}
     SQL
@@ -48,7 +47,7 @@ class SQLObject
 
   def self.parse_all(results)
     results.map do |attributes_hash|
-      self.new(attributes_hash)
+      new(attributes_hash)
     end
   end
 
@@ -85,6 +84,7 @@ class SQLObject
   def insert
     col_names = self.class.columns.join(', ')
     question_marks = (['?'] * self.class.columns.size).join(', ')
+    
     DBConnection.execute(<<-SQL, *attribute_values)
     INSERT INTO
       #{self.class.table_name} (#{col_names})
@@ -92,15 +92,15 @@ class SQLObject
       (#{question_marks})
     SQL
 
-    send(:id=, DBConnection.last_insert_row_id)
+    self.id = DBConnection.last_insert_row_id
   end
 
   def update
-    set_line = self.class.columns.map do |attr_name|
-      "#{attr_name} = ?"
-    end.join(', ')
+    set_line = self.class.columns
+      .map { |attr_name| "#{attr_name} = ?" }
+      .join(', ')
 
-    DBConnection.execute(<<-SQL, *attribute_values, send(:id))
+    DBConnection.execute(<<-SQL, *attribute_values, id)
     UPDATE
       #{self.class.table_name}
     SET
@@ -111,7 +111,7 @@ class SQLObject
   end
 
   def save
-    if send(:id).nil?
+    if id.nil?
       insert
     else
       update
