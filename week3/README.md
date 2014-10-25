@@ -46,3 +46,15 @@ Focus:
 
 * optimizing ActiveRecord/SQL (avoiding N+1 queries with eager loading)
 * the border between SQL and ActiveRecord (```find_by_sql```, ```#joins```, ```#select```, ```#where```)
+
+Day 5
+---
+**Main Project**: ActiveRecord Lite
+
+Partner: None (solo day)
+
+Focus:
+
+* metaprogramming
+* scope
+* modules
