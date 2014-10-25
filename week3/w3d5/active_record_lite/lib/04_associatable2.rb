@@ -5,7 +5,7 @@ module Associatable
     define_method(name) do
       through_options = self.class.assoc_options[through_name]
       source_options = through_options.model_class.assoc_options[source_name]
-      sql_result = DBConnection.execute(<<-SQL)
+      result = DBConnection.execute(<<-SQL, send(through_options.foreign_key))
       SELECT
         #{source_options.table_name}.*
       FROM
@@ -13,12 +13,13 @@ module Associatable
       JOIN
         #{through_options.table_name}
       ON
-        #{source_options.table_name}.#{source_options.primary_key} = #{through_options.table_name}.#{source_options.foreign_key}
+        #{source_options.table_name}.#{source_options.primary_key} =
+          #{through_options.table_name}.#{source_options.foreign_key}
       WHERE
-        #{through_options.table_name}.#{through_options.primary_key} = #{send(through_options.foreign_key)}
+        #{through_options.table_name}.#{through_options.primary_key} = ?
       SQL
 
-      source_options.model_class.parse_all(sql_result).first
+      source_options.model_class.parse_all(result).first
     end
   end
 end
