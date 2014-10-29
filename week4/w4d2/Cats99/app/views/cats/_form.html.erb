@@ -15,8 +15,7 @@
         type="radio"
         name="cat[sex]"
         value="<%= sex %>"
-        <%= 'checked' if @cat.sex == sex %>
-      >
+        <%= 'checked' if @cat.sex == sex %>>
       <%= sex %>
       <br>
     </label>
@@ -40,8 +39,7 @@
       type="date"
       name="cat[birth_date]"
       max="<%= Date.current %>"
-      value="<%= cat.birth_date %>"
-    >
+      value="<%= cat.birth_date %>">
     <br>
   </label>
   
