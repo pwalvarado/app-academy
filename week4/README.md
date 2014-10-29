@@ -9,3 +9,14 @@ Focus:
 * routes (nested resources)
 * controllers (handling invalid data/requests)
 * params (stong params, nested params)
+
+Day 2
+---
+**Main Project**: Cats99 (a cat rental app)
+
+Partner: Danny Burt
+
+Focus:
+
+* views
+* HTML forms

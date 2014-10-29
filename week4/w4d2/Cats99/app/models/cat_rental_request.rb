@@ -34,33 +34,23 @@ class CatRentalRequest < ActiveRecord::Base
     else
       query
     end
-      # .where("id#{id ? " != " + id.to_s : " IS NOT NULL"}")
   end
   
-  def no_overlapping_requests # Dangerous
+  def no_overlapping_requests
     return unless cat_id && start_date && end_date
     approved_requests = overlapping_requests.where("status = 'APPROVED'")
     unless approved_requests.count == 0
-      errors[:rental_request] << 
+      errors[:rental_request] <<
         "Kitty #{Cat.find(cat_id).name} is already rented during that time"
     end
   end
   
   def set_default_status
-    @status ||= "PENDING" 
+    @status ||= 'PENDING'
   end
   
   def approve!
     CatRentalRequest.transaction do
-      puts
-      puts
-      puts
-      p "about to give the overlapping requests"
-      puts
-      p overlapping_requests
-      puts
-      puts "end end"
-      puts
       overlapping_requests.update_all(status: "DENIED")
       self.update(status: "APPROVED")
     end
