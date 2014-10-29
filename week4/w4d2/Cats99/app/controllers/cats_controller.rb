@@ -6,10 +6,13 @@ class CatsController < ApplicationController
   
   def show
     @cat = Cat.find(params[:id])
+    @rental_requests = CatRentalRequest.where("cat_id = #{@cat.id}").order(:start_date)
+      
     render :show
   end
   
   def new
+    @cat = Cat.new
     render :new
   end
   
@@ -21,7 +24,20 @@ class CatsController < ApplicationController
       flash.now[:errors] = @cat.errors.full_messages
       render :new
     end
-    
+  end
+  
+  def edit
+    @cat = Cat.find(params[:id])
+  end
+  
+  def update
+    @cat = Cat.find(params[:id])
+    if @cat.update(cat_params)
+      redirect_to cat_url(@cat)
+    else
+      flash.now[:errors] = @cat.errors.full_messages
+      render :edit
+    end
   end
   
   private

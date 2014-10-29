@@ -1,0 +1,40 @@
+<h1>Request time with a kitty-cat</h1>
+
+<form method="POST" action="<%= cat_rental_requests_url %>">
+  
+  <select name="cat_rental_request[cat_id]">
+    <option value="default_blank" selected>Choose Cat</option>
+    <% @cats.each do |cat| %>
+      <option
+        value="<%= cat.id %>"
+        <%= 'selected' if @cat_rental_request.cat_id == cat.id %>>
+          <%= cat.name %>
+      </option>
+    <% end %>
+  </select>
+  <br>
+  
+  <label>Start Date
+    <input
+      type="date"
+      name="cat_rental_request[start_date]"
+      min="<%= Date.tomorrow %>"
+      value="<%= @cat_rental_request.start_date %>"
+    >
+    <br>
+  </label>
+  
+  <label>End Date
+    <input
+      type="date"
+      name="cat_rental_request[end_date]"
+      min="<%= @cat_rental_request.start_date || Date.tomorrow %>"
+      value="<%= @cat_rental_request.end_date %>"
+    >
+    <br>
+  </label>
+  
+  <br>
+  <br>
+  <input type="submit" value="Rent a cat!">
+</form>

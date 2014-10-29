@@ -6,6 +6,8 @@
 </head>
 <body>
 
+<%= flash[:errors] && flash[:errors].to_json%>
+
 <%= yield %>
 
 </body>

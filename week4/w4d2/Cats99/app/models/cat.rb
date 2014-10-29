@@ -13,12 +13,21 @@
 #
 
 class Cat < ActiveRecord::Base
+  COLORS = %w{red blue yellow purple}
+  SEXES = %w{M F}
+  
   validates :birth_date, timeliness: { on_or_before: Date.current }
-  validates :color, inclusion: { in: ["red", "blue", "yellow", "purple"],
+  validates :color, inclusion: { in: COLORS,
     message: "NOT A COLOR OF A CAT" }
-  validates :sex, inclusion: { in: ["M", "F"],
+  validates :sex, inclusion: { in: SEXES,
     message: "THAT'S NOT A SEX" }
   validates :birth_date, :name, :sex, presence: true
+  
+  has_many(
+    :cat_rental_requests,
+    dependent: :destroy
+  )
+  
   
   def age
     (Date.current - @birth_date)/365
