@@ -6,11 +6,20 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by_credentials(user_params)
-    redirect_to user_url(@user)
+    if @user
+      log_in!(@user)
+      redirect_to user_url(@user)
+    else
+      flash.now[:errors] ||= []
+      flash.now[:errors] << 'Invalid username/password combination.'
+      @user = User.new(user_params)
+      render :new
+    end
   end
 
   def destroy
-
+    log_out!
+    redirect_to new_session_url
   end
 
   private

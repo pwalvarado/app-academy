@@ -1,0 +1,11 @@
+<% if current_user %>
+  <%= "Logged in as #{current_user.email}." %>
+  <br>
+  <%= button_to 'Log out', session_url, method: :delete %>
+<% else %>
+  <%= 'Not logged in.' %>
+  <br>
+  <%= link_to 'Log in', new_session_url %>
+  or
+  <%= link_to 'Sign up', new_user_url %>
+<% end %>
