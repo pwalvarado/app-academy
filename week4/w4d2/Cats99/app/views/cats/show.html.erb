@@ -30,22 +30,32 @@
     <th>Start Date</th>
     <th>End Date</th>
     <th>Status</th>
+    <th>Requester</th>
   </tr>
   <% @rental_requests.each do |request| %>
     <tr>
       <td><%= request.start_date %></td>
       <td><%= request.end_date %></td>
       <td><%= request.status %></td>
-      <td><%= button_to(
+      <td>
+        <%= request.requester.user_name %>
+      </td>
+      
+      <%if cat_owner?%>
+      <td>
+        <%= button_to(
                 'Approve',
                 approve_cat_rental_request_url(request),
                 method: 'patch') if request.pending? %>
       </td>
-      <td><%= button_to(
+      <td>
+        <%= button_to(
                 'Deny',
                 deny_cat_rental_request_url(request),
                 method: 'patch') if request.pending? %>
       </td>
+      <%end%>
+
     </tr>
   <% end %>
   

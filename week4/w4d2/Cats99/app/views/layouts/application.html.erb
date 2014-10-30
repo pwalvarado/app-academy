@@ -5,7 +5,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<h1>
+<%if current_user.nil?%>
+please <%= link_to 'sign in', new_session_url %>
+<%else%>
+hello, <%=current_user.user_name%>
+<%= button_to 'sign out', session_url, method: 'delete' %>
+<%end%>
+</h1>
 <%= flash[:errors] && flash[:errors].to_json%>
 
 <%= yield %>

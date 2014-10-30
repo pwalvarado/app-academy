@@ -1,4 +1,6 @@
 class CatsController < ApplicationController
+  before_action :ensure_logged_in, :except => [:index, :show]
+  
   def index
     @cats = Cat.all
     render :index 
@@ -6,8 +8,8 @@ class CatsController < ApplicationController
   
   def show
     @cat = Cat.find(params[:id])
-    @rental_requests = CatRentalRequest.where("cat_id = #{@cat.id}").order(:start_date)
-      
+    @rental_requests = CatRentalRequest.where("cat_id =               #{@cat.id}").order(:start_date)
+        
     render :show
   end
   
@@ -18,6 +20,7 @@ class CatsController < ApplicationController
   
   def create
     @cat = Cat.new(cat_params)
+    @cat.user_id = current_user.id
     if @cat.save
       redirect_to cat_url(@cat)
     else
@@ -28,6 +31,11 @@ class CatsController < ApplicationController
   
   def edit
     @cat = Cat.find(params[:id])
+    unless @cat.owner.id == current_user.id
+      flash[:errors] ||= []
+      flash[:errors] << "You can only edit your own cats."
+      redirect_to cats_url
+    end
   end
   
   def update

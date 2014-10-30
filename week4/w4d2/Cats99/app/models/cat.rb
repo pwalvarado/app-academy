@@ -10,6 +10,7 @@
 #  description :text
 #  created_at  :datetime
 #  updated_at  :datetime
+#  user_id     :integer
 #
 
 class Cat < ActiveRecord::Base
@@ -20,6 +21,14 @@ class Cat < ActiveRecord::Base
   validates :color, inclusion: { in: COLORS, message: "NOT A COLOR OF A CAT" }
   validates :sex, inclusion: { in: SEXES, message: "THAT'S NOT A SEX" }
   validates :birth_date, :name, :sex, presence: true
+  validates :user_id, presence: true
+  
+  belongs_to(
+  :owner,
+  :class_name => "User",
+  :foreign_key => :user_id,
+  :primary_key => :id
+    ) 
   
   has_many(
     :cat_rental_requests,

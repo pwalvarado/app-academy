@@ -1,7 +1,10 @@
 <h1>Request time with a kitty-cat</h1>
 
 <form method="POST" action="<%= cat_rental_requests_url %>">
-  
+  <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token %>">  
+
   <select name="cat_rental_request[cat_id]">
     <option value="default_blank" selected>Choose Cat</option>
     <% @cats.each do |cat| %>

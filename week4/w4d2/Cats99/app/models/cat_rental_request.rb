@@ -2,13 +2,14 @@
 #
 # Table name: cat_rental_requests
 #
-#  id         :integer          not null, primary key
-#  cat_id     :integer          not null
-#  start_date :date             not null
-#  end_date   :date             not null
-#  status     :string(255)      default("PENDING")
-#  created_at :datetime
-#  updated_at :datetime
+#  id           :integer          not null, primary key
+#  cat_id       :integer          not null
+#  start_date   :date             not null
+#  end_date     :date             not null
+#  status       :string(255)      default("PENDING")
+#  created_at   :datetime
+#  updated_at   :datetime
+#  requester_id :integer          not null
 #
 
 class CatRentalRequest < ActiveRecord::Base
@@ -18,8 +19,13 @@ class CatRentalRequest < ActiveRecord::Base
   validate :no_overlapping_requests
   after_initialize :set_default_status
   
-  
   belongs_to(:cat)
+  belongs_to(
+    :requester,
+    class_name: 'User',
+    foreign_key: :requester_id,
+    primary_key: :id
+  )
   
   def overlapping_requests
     query = CatRentalRequest.where(<<-SQL)

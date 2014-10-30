@@ -19,5 +19,3 @@ development:
   encoding: unicode
   database: Cats99_development
   pool: 5
-  username: david
-  password:

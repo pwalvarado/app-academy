@@ -41,7 +41,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'bcrypt'
 group :development do
+  gem 'annotate'
   gem 'spring'
   gem 'better_errors'
   gem 'binding_of_caller'
