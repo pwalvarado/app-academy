@@ -20,3 +20,16 @@ Focus:
 
 * views
 * HTML forms
+
+Day 3
+---
+**Main Project**: Cats99 continued
+
+Partner: Jim Tsai
+
+Focus:
+
+* authentication
+* authorization
+* CSRF protection
+* `session`/cookies
