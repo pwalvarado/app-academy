@@ -15,8 +15,8 @@
 
   <label>Recorded by
     <select name="album[band_id]">
-      <% bands.each do |band| %>
-        <option value="<%= band.id %>" <%= 'selected' if band.id == band.id %>><%= band.name %></option>
+      <% bands.each do |a_band| %>
+        <option value="<%= a_band.id %>" <%= 'selected' if a_band.id == band.id %>><%= a_band.name %></option>
       <% end %>
     </select>
   </label>

@@ -2,5 +2,10 @@
 <h2>On <%= link_to @track.album.name, album_url(@track.album) %></h2>
 
 <%= button_to 'Delete this track', track_url(@track), method: :delete %>
+<br>
 
-<%= render 'notes/note_form', action: :new %>
+<ul>
+  <%= render @track.notes %>
+</ul>
+
+<%= render 'notes/note_form', action: :new, track: @track %>

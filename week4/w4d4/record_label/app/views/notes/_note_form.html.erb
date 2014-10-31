@@ -1,4 +1,4 @@
-<% url = (action == :new) ? notes_url : note_url(note) %>
+<% url = (action == :new) ? track_notes_url(track) : note_url(note) %>
 <% http_verb = {:new => 'post', :edit => 'patch'}[action] %>
 <% action_description = {:new => 'Create note', :edit => 'Update note'}[action] %>
 

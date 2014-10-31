@@ -15,8 +15,8 @@
 
   <label>On album:
     <select name="track[album_id]">
-      <% albums.each do |album| %>
-        <option value="<%= album.id %>" <%= 'selected' if album.id == album.id %>><%= album.name %></option>
+      <% albums.each do |an_album| %>
+        <option value="<%= an_album.id %>" <%= 'selected' if an_album.id == album.id %>><%= an_album.name %></option>
       <% end %>
     </select>
   </label>
