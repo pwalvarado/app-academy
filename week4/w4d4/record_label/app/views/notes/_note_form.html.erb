@@ -1,6 +1,6 @@
-<% url = (action == :new) ? bands_url : band_url(band) %>
+<% url = (action == :new) ? notes_url : note_url(note) %>
 <% http_verb = {:new => 'post', :edit => 'patch'}[action] %>
-<% action_description = {:new => 'Create band', :edit => 'Update band'}[action] %>
+<% action_description = {:new => 'Create note', :edit => 'Update note'}[action] %>
 
 <form action="<%= url %>" method="post">
   <input type='hidden' name='_method' value='<%= http_verb %>'/>
@@ -8,8 +8,8 @@
          name="authenticity_token"
          value="<%= form_authenticity_token %>" />
 
-  <label>Band name
-    <input type="text" name="band[name]" value="<%= @band.name %>">
+  <label>Your note<br>
+    <textarea rows="4" cols="50" name="note[body]"></textarea>
   </label>
   <br>
 

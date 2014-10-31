@@ -1,0 +1,43 @@
+<% url = (action == :new) ? tracks_url : track_url(track) %>
+<% http_verb = {:new => 'post', :edit => 'patch'}[action] %>
+<% action_description = {:new => 'Create track', :edit => 'Update track'}[action] %>
+
+<form action="<%= url %>" method="post">
+  <input type='hidden' name='_method' value='<%= http_verb %>'/>
+  <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token %>">
+
+  <label>Track name
+    <input type="text" name="track[name]" value="<%= track.name %>">
+  </label>
+  <br>
+
+  <label>On album:
+    <select name="track[album_id]">
+      <% albums.each do |album| %>
+        <option value="<%= album.id %>" <%= 'selected' if album.id == album.id %>><%= album.name %></option>
+      <% end %>
+    </select>
+  </label>
+  <br>
+
+  Track type
+    <% Track::TTYPES.each do |ttype| %>
+      <label>
+        <input type="radio"
+               name="track[ttype]"
+               value="<%= ttype %>"
+               <%= 'checked' if track.ttype == ttype %> >
+        <%= ttype %>
+      </label>
+    <% end %>
+  <br>
+
+  <label>Lyrics
+    <textarea name="track[lyrics]"><%= track.lyrics %></textarea>
+  </label>
+  <br>
+
+  <input type="submit" value="<%= action_description %>">
+</form>

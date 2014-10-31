@@ -24,6 +24,26 @@ class TracksController < ApplicationController
     end
   end
 
+  def edit
+    @track = Track.find(params[:id])
+    @album = @track.album
+    @albums = Album.all
+    render :edit
+  end
+
+  def update
+    @track = Track.find(params[:id])
+    if @track.update_attributes(track_params)
+      redirect_to track_url(@track)
+    else
+      flash.now[:errors] ||= []
+      flash.now[:errors] += @track.errors.full_messages
+      @album = @track.album
+      @albums = Album.all
+      render :edit
+    end
+  end
+
   def destroy
     @track = Track.find(params[:id])
     @album = @track.album

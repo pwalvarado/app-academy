@@ -18,9 +18,29 @@ class AlbumsController < ApplicationController
     else
       flash.now[:errors] ||= []
       flash.now[:errors] += @album.errors.full_messages
-      @band = Band.find(@album.band_id)
+      @band = @album.band
       @bands = Band.all
       render :new
+    end
+  end
+
+  def edit
+    @album = Album.find(params[:id])
+    @band = @album.band
+    @bands = Band.all
+    render :edit
+  end
+
+  def update
+    @album = Album.find(params[:id])
+    if @album.update_attributes(album_params)
+      redirect_to album_url(@album)
+    else
+      flash.now[:errors] ||= []
+      flash.now[:errors] += @album.errors.full_messages
+      @band = @album.band
+      @bands = Band.all
+      render :edit
     end
   end
 

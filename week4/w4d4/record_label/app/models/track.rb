@@ -13,10 +13,9 @@
 
 class Track < ActiveRecord::Base
   TTYPES = ['Regular', 'Bonus']
-
   validates :album_id, :name, presence: true
   validates :name, uniqueness: { scope: :album_id }
   validates :ttype, inclusion: TTYPES, allow_nil: true
-
   belongs_to :album
+  has_many :notes
 end

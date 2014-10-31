@@ -1,35 +1,3 @@
 <h1>New Album</h1>
 
-<form action="<%= albums_url %>" method="post">
-  <input type="hidden"
-         name="authenticity_token"
-         value="<%= form_authenticity_token %>">
-
-  <label>Album name
-    <input type="text" name="album[name]" value="<%= @album.name %>">
-  </label>
-  <br>
-
-  <label>Recorded by
-    <select name="album[band_id]">
-      <% @bands.each do |band| %>
-        <option value="<%= band.id %>" <%= 'selected' if @band.id == band.id %>><%= band.name %></option>
-      <% end %>
-    </select>
-  </label>
-  <br>
-
-  Track type
-    <% Track::TTYPES.each do |ttype| %>
-      <label>
-        <input type="radio"
-               name="album[ttype]"
-               value="<%= ttype %>"
-               <%= 'checked' if @album.ttype == ttype %> >
-        <%= ttype %>
-      </label>
-    <% end %>
-  <br>
-
-  <input type="submit" value="Create album">
-</form>
+<%= render 'album_form', album: @album, action: :new %>
