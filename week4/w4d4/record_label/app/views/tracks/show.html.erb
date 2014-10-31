@@ -1,8 +1,12 @@
 <h1><%= @track.name %></h1>
 <h2>On <%= link_to @track.album.name, album_url(@track.album) %></h2>
 
+<%= link_to 'Edit this track', edit_track_url(@track) %>
 <%= button_to 'Delete this track', track_url(@track), method: :delete %>
 <br>
+
+<h3>Lyrics</h3>
+<%= ugly_lyrics(@track.lyrics) %>
 
 <ul>
   <%= render @track.notes %>
