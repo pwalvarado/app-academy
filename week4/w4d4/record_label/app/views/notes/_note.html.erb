@@ -1,1 +1,6 @@
-<li><%= note.body %></li>
+<li>
+  <%= note.body %>
+  <br>
+  ---<%= mail_to note.user_email %>
+</li>
+<br>
