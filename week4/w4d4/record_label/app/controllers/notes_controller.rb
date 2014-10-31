@@ -13,4 +13,15 @@ class NotesController < ApplicationController
   def note_params
     params.require(:note).permit(:body)
   end
+
+  def destroy
+    @note = Note.find(params[:id])
+    if !(current_user.id == @note.user_id)
+      render text: "That's not your note, jerk.", status: :forbidden
+    else
+      @track = @note.track
+      @note.destroy!
+      redirect_to @track
+    end
+  end
 end

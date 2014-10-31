@@ -14,7 +14,7 @@ class AlbumsController < ApplicationController
   def create
     @album = Album.new(album_params)
     if @album.save
-      redirect_to album_url(@album)
+      redirect_to @album
     else
       flash.now[:errors] ||= []
       flash.now[:errors] += @album.errors.full_messages
@@ -34,7 +34,7 @@ class AlbumsController < ApplicationController
   def update
     @album = Album.find(params[:id])
     if @album.update_attributes(album_params)
-      redirect_to album_url(@album)
+      redirect_to @album
     else
       flash.now[:errors] ||= []
       flash.now[:errors] += @album.errors.full_messages
@@ -48,7 +48,7 @@ class AlbumsController < ApplicationController
     @album = Album.find(params[:id])
     @band = @album.band
     @album.destroy!
-    redirect_to band_url(@band)
+    redirect_to @band
   end
 
   private

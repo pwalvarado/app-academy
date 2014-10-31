@@ -2,5 +2,6 @@
   <%= note.body %>
   <br>
   ---<%= mail_to note.user_email %>
+  <%= delete_button(note) %>
 </li>
 <br>

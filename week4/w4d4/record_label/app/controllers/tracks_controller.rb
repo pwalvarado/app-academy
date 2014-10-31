@@ -14,7 +14,7 @@ class TracksController < ApplicationController
   def create
     @track = Track.new(track_params)
     if @track.save
-      redirect_to track_url(@track)
+      redirect_to @track
     else
       flash.now[:errors] ||= []
       flash.now[:errors] += @track.errors.full_messages
@@ -34,7 +34,7 @@ class TracksController < ApplicationController
   def update
     @track = Track.find(params[:id])
     if @track.update_attributes(track_params)
-      redirect_to track_url(@track)
+      redirect_to @track
     else
       flash.now[:errors] ||= []
       flash.now[:errors] += @track.errors.full_messages
@@ -48,7 +48,7 @@ class TracksController < ApplicationController
     @track = Track.find(params[:id])
     @album = @track.album
     @track.destroy!
-    redirect_to album_url(@album)
+    redirect_to @album
   end
 
   private
