@@ -33,3 +33,23 @@ Focus:
 * authorization
 * CSRF protection
 * `session`/cookies
+
+Day 4
+---
+**Main Project**: Record Label app (Bands/Album/Tracks/Users)
+
+Partner: none (solo day)
+
+Focus:
+
+* practice concepts learned earlier this week (auth, routes, controllers, views)
+
+Day 5
+---
+**Main Project**: reddit clone
+
+Partner: Weihao Li
+
+Focus:
+
+* practice concepts learned earlier this week (auth, routes, controllers, views)
