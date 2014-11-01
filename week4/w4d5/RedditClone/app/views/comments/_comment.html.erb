@@ -1,0 +1,11 @@
+<li>
+  <%= c1.content %>
+  [<%= link_to "Add a Child Comment",
+    new_comment_url(post_id: @post.id, parent_comment_id: c1.id) %>]
+</li>
+<ul>
+  <% comments_by_parent_id[c1.id].each do |c2| %>
+    <%= render 'comments/comment', c1: c2, post: post, 
+        comments_by_parent_id: @comments_by_parent_id%>
+  <% end %>
+</ul>

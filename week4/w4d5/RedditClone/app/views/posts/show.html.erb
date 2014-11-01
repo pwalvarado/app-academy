@@ -1,0 +1,12 @@
+<h1><%= link_to @post.title, @post.url %></h1>
+
+<p><%= @post.content %></p>
+
+<ul>
+  <% @comments_by_parent_id[nil].each do |c1| %>
+    <%= render "comments/comment", post: @post, c1: c1, 
+        comments_by_parent_id: @comments_by_parent_id%>
+  <% end %>
+</ul>
+
+<%= link_to "Add Comment", new_comment_url(post_id: @post.id)  %>
