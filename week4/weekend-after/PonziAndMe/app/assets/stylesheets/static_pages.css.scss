@@ -1,0 +1,24 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.center-vertical {
+    float:none;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.center-vertical>img {
+	margin: 30px auto;
+	max-width: 300px;
+	display: block;
+}
+
+.carousel.slide {
+	width: 450px;
+	margin: auto;
+}
+
+#team-members div {
+	margin-bottom: 15px;
+}
