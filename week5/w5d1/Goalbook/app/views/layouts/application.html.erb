@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Goalbook</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= flash[:errors] %>
+  
+<% if logged_in? %>
+  <h4>Hi, <%= current_user.username %></h4>
+<% end %>
+
+<%= yield %>
+
+<% if logged_in? %>
+  <%= button_to "Log Out", session_url, method: :delete %>
+<% else %>
+  <%= link_to "Log In", new_session_url %>
+  <%= link_to "Sign Up", new_user_url %>
+<% end %>
+
+</body>
+</html>
