@@ -94,18 +94,13 @@ feature "public/private goal setting" do
     end
     
     specify 'can be seen if public' do
-      save_and_open_page
       expect(page).to have_link public_goal.title
     end
     
     specify 'can not be seen if private' do
       expect(page).not_to have_link private_goal.title
     end
-    
-    
-    
   end
-  
 end
 
 def create_private_goal(goal)
