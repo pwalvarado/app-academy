@@ -1,5 +1,6 @@
 <li>
   <%= c1.content %>
+  [by: <%= c1.author.username %>]
   [<%= link_to "Add a Child Comment",
     new_comment_url(post_id: @post.id, parent_comment_id: c1.id) %>]
 </li>
