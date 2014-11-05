@@ -6,13 +6,12 @@ module Phase4
     # find the cookie for this app
     # deserialize the cookie into a hash
     def initialize(req)
-        req.cookies.each do |cookie|
-            if cookie.name == '_rails_lite_app'
-                @cookie_hash = JSON.parse(cookie.value)
-            end
-        end
+        @cookie_hash = preexisting_cookie_hash(req) || {}
+    end
 
-        @cookie_hash ||= {}
+    def preexisting_cookie_hash(req)
+        cookie = req.cookies.find { |cookie| cookie.name == '_rails_lite_app' }
+        JSON.parse(cookie.value) if cookie
     end
 
     def [](key)
