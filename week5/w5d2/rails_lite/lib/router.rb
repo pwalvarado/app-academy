@@ -1,4 +1,4 @@
-  class Route
+class Route
     attr_reader :pattern, :http_method, :controller_class, :action_name
 
     def initialize(pattern, http_method, controller_class, action_name)
@@ -60,5 +60,4 @@
         matching_route = match(req)
         matching_route.nil? ? res.status = 404 : matching_route.run(req, res)
     end
-  end
-  
+end

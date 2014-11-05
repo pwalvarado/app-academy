@@ -1,6 +1,6 @@
 require 'uri'
 
-  class Params
+class Params
     # use your initialize to merge params from
     # 1. query string
     # 2. post body
@@ -58,4 +58,4 @@ require 'uri'
         additive_merge(h1[key], h2[key])
       end
     end
-  end
+end

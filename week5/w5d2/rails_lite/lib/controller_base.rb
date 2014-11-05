@@ -1,5 +1,6 @@
 class ControllerBase
-  attr_accessor :req, :res, :already_built_response
+  attr_accessor :already_built_response
+  attr_reader :req, :res
   attr_reader :params
 
   # Setup the controller
@@ -44,11 +45,9 @@ class ControllerBase
     render_content(erb_template.result(binding), 'text/html')
   end
 
-  # method exposing a `Session` object
   def session
     @session ||= Session.new(req)
   end
-
 
   # use this with the router to call action_name (:index, :show, :create...)
   def invoke_action(name)
