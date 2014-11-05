@@ -11,15 +11,15 @@ module Phase2
 
     # Helper method to alias @already_built_response
     def already_built_response?
-      @already_built_response
+      already_built_response
     end
 
     # Set the response status code and header
     def redirect_to(url)
       raise 'already built response' if already_built_response?
-      @res.status = 302
-      @res.header['location'] = url
-      @already_built_response = true
+      self.res.status = 302
+      self.res.header['location'] = url
+      self.already_built_response = true
     end
 
     # Populate the response with content.
