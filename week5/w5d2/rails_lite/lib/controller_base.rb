@@ -1,3 +1,5 @@
+require 'session'
+
 class ControllerBase
   attr_accessor :already_built_response
   attr_reader :req, :res, :params
@@ -13,7 +15,6 @@ class ControllerBase
     already_built_response
   end
 
-  # Set the response status code and header
   def redirect_to(url)
     raise 'already built response' if already_built_response?
     self.res.status = 302
