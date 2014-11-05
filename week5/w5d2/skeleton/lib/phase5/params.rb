@@ -16,7 +16,7 @@ module Phase5
     end
 
     def [](key)
-        @params[key]
+        @params[key.to_s]
     end
 
     def to_s

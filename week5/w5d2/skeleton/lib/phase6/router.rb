@@ -18,9 +18,7 @@ module Phase6
     # instantiate controller and call controller action
     def run(req, res)
         req.path =~ pattern
-        route_params = Hash[$~.names.map{|x| [x.to_sym, $~[x]]}]
-        p 'here'
-        p route_params
+        route_params = Hash[$~.names.map{|x| [x.to_s, $~[x]]}]
         controller = controller_class.new(req, res, route_params)
         controller.invoke_action(action_name)
     end

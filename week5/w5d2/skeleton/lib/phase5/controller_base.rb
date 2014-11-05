@@ -9,7 +9,7 @@ module Phase5
     def initialize(req, res, route_params = {})
       @req = req
       @res = res
-      @route_params = route_params
+      @params ||= Params.new(req, route_params)
     end
   end
 end
