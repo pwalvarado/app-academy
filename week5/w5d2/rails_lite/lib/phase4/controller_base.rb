@@ -9,7 +9,7 @@ module Phase4
     end
 
     def render_content(content, type)
-      super(content, type)
+      super
       self.session.store_session(res)
     end
 
