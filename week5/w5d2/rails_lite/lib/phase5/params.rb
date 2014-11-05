@@ -55,11 +55,7 @@ module Phase5
 
     def additive_merge(h1, h2)
       h1.merge(h2) do |key, value1, value2|
-        if h2[key]
-          additive_merge(h1[key], h2[key])
-        else
-          value1
-        end
+        additive_merge(h1[key], h2[key])
       end
     end
   end
