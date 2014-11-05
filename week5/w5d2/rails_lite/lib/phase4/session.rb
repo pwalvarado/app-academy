@@ -7,7 +7,9 @@ module Phase4
     # deserialize the cookie into a hash
     def initialize(req)
         req.cookies.each do |cookie|
-            @cookie_hash = JSON.parse(cookie.value) if cookie.name == '_rails_lite_app'
+            if cookie.name == '_rails_lite_app'
+                @cookie_hash = JSON.parse(cookie.value)
+            end
         end
 
         @cookie_hash ||= {}
