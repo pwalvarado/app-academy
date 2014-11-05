@@ -1,9 +1,7 @@
 class ControllerBase
   attr_accessor :already_built_response
-  attr_reader :req, :res
-  attr_reader :params
+  attr_reader :req, :res, :params
 
-  # Setup the controller
   def initialize(req, res, route_params = {})
     @req = req
     @res = res
@@ -11,7 +9,6 @@ class ControllerBase
     @already_built_response = false
   end
 
-  # Helper method to alias @already_built_response
   def already_built_response?
     already_built_response
   end
