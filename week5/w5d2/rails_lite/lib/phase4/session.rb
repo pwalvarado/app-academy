@@ -16,7 +16,7 @@ module Phase4
     end
 
     def [](key)
-        @cookie_hash[key]
+        @cookie_hash[key.to_s]
     end
 
     def []=(key, val)
