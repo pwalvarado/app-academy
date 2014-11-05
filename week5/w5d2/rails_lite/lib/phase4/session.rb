@@ -20,7 +20,7 @@ module Phase4
     end
 
     def []=(key, val)
-        @cookie_hash[key] = val
+        @cookie_hash[key.to_s] = val
     end
 
     # serialize the hash into json and save in a cookie
