@@ -11,8 +11,8 @@ module Phase5
     # passed in as a hash to `Params.new` as below:
     def initialize(req, route_params = {})
         @params = route_params
-        parse_www_encoded_form(req.query_string) if req.query_string
-        parse_www_encoded_form(req.body) if req.body
+        merge_params!(req.query_string) if req.query_string
+        merge_params!(req.body) if req.body
     end
 
     def [](key)
@@ -31,19 +31,12 @@ module Phase5
     # user[address][street]=main&user[address][zip]=89436
     # should return
     # { "user" => { "address" => { "street" => "main", "zip" => "89436" } } }
-    def parse_www_encoded_form(www_encoded_form)
-        rough_decoding = URI::decode_www_form(www_encoded_form)
-        rough_decoding.each do |key, value|
-            keys = parse_key(key)
-            h = {}
-            keys.reverse.each_with_index do |a_key, i|
-              if i == 0
-                h = Hash[a_key, value]
-              else
-                h = Hash[a_key, h]
-              end
-            end
-            @params = additive_merge(h, @params)
+    def merge_params!(www_encoded_form)
+        key_value_pairs = URI::decode_www_form(www_encoded_form)
+        key_value_pairs.each do |key_string, value|
+            key_set = parse_key(key_string)
+            param_hash = nested_hash(key_set, value)
+            @params = additive_merge(@params, param_hash)
         end
     end
 
@@ -51,6 +44,14 @@ module Phase5
     # user[address][street] should return ['user', 'address', 'street']
     def parse_key(key)
         key.split(/\]\[|\[|\]/)
+    end
+
+    def nested_hash(key_set, value)
+        if key_set.size == 1
+            { key_set.first => value }
+        else
+           { key_set.first => nested_hash( key_set.drop(1), value ) }
+        end
     end
 
     def additive_merge(h1, h2)
