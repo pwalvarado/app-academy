@@ -1,13 +1,18 @@
-require 'session'
+require_relative './session'
+require_relative './params'
+require_relative './flash'
+require 'active_support/core_ext'
+require 'erb'
 
 class ControllerBase
   attr_accessor :already_built_response
-  attr_reader :req, :res, :params
+  attr_reader :req, :res, :params, :flash
 
   def initialize(req, res, route_params = {})
     @req = req
     @res = res
     @params ||= Params.new(req, route_params)
+    @flash = Flash.new(req)
     @already_built_response = false
   end
 
@@ -21,6 +26,7 @@ class ControllerBase
     self.res.header['location'] = url
     self.already_built_response = true
     session.store_session(res)
+    flash.store_flash(res)
   end
 
   # Populate the response with content.
@@ -32,6 +38,7 @@ class ControllerBase
     self.res.content_type = content_type
     self.already_built_response = true
     session.store_session(res)
+    flash.store_flash(res)
   end
 
   # use ERB and binding to evaluate templates

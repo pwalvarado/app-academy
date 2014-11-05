@@ -1,3 +1,5 @@
+require_relative './route'
+
   class Router
     attr_reader :routes
 
