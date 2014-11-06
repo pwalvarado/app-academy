@@ -1,0 +1,21 @@
+<h1>New Cat</h1>
+
+<form action="/cats" method="post">
+  <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token %>">
+
+  <label>
+    Cat ID:
+    <input name="id" type="text">
+  </label>
+  <br>
+
+  <label>
+    Cat Name:
+    <input name="name" type="text">
+  </label>
+  <br>
+
+  <input type="submit" value="Make Cat!">
+</form>

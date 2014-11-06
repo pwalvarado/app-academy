@@ -3,17 +3,29 @@ require_relative './params'
 require_relative './flash'
 require 'active_support/core_ext'
 require 'erb'
+require 'securerandom'
 
 class ControllerBase
   attr_accessor :already_built_response
-  attr_reader :req, :res, :params, :flash
+  attr_reader :req, :res, :params, :flash, :form_authenticity_token
 
   def initialize(req, res, route_params = {})
     @req = req
     @res = res
     @params ||= Params.new(req, route_params)
+    protect_from_csrf_attack
     @flash = Flash.new(req)
     @already_built_response = false
+    @form_authenticity_token = SecureRandom.urlsafe_base64(16)
+  end
+
+  def protect_from_csrf_attack
+    return if req.request_method == 'GET'
+    unless (params[:authenticity_token] && session[:authenticity_token] &&
+      params[:authenticity_token] == session[:authenticity_token]
+    )
+      raise 'CSRF attack detected!'
+    end
   end
 
   def already_built_response?
@@ -25,8 +37,7 @@ class ControllerBase
     self.res.status = 302
     self.res.header['location'] = url
     self.already_built_response = true
-    session.store_session(res)
-    flash.store_flash(res)
+    run_controller_closeout_actions
   end
 
   # Populate the response with content.
@@ -37,6 +48,11 @@ class ControllerBase
     self.res.body = body
     self.res.content_type = content_type
     self.already_built_response = true
+    run_controller_closeout_actions
+  end
+
+  def run_controller_closeout_actions
+    session[:authenticity_token] = form_authenticity_token
     session.store_session(res)
     flash.store_flash(res)
   end

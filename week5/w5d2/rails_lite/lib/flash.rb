@@ -5,24 +5,23 @@ class Flash
   attr_accessor :current_flash_hash, :next_flash_hash
 
   def initialize(req)
-      @current_flash_hash = cookie_to_hash( flash_cookie(req) ) || {}
-      @next_flash_hash = {}
+    @current_flash_hash = cookie_to_hash( flash_cookie(req) ) || {}
+    @next_flash_hash = {}
   end
 
   # find the flash cookie for this app
   def flash_cookie(req)
-      req.cookies.find { |cookie| cookie.name == '_rails_lite_app_flash' }
+    req.cookies.find { |cookie| cookie.name == '_rails_lite_app_flash' }
   end
 
   # deserialize the cookie into a hash
   def cookie_to_hash( cookie )
-      cookie.nil? ? nil : JSON.parse( cookie.value )
+    cookie.nil? ? nil : JSON.parse( cookie.value )
   end
 
   # serialize the hash as json, save in a cookie, add to the response
   def store_flash(res)
     clear_flash(res)  
-    p next_flash_hash
     flash_cookie = WEBrick::Cookie.new(
       '_rails_lite_app_flash', next_flash_hash.to_json
     )
@@ -35,12 +34,10 @@ class Flash
   end
 
   def [](key)
-      current_flash_hash[key.to_s]
+    current_flash_hash[key.to_s]
   end
 
   def []=(key, val)
-      self.next_flash_hash[key.to_s] = val
-      p 'next flash hash:'
-      p next_flash_hash
+    self.next_flash_hash[key.to_s] = val
   end
 end
