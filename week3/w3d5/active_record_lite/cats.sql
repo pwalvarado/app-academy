@@ -20,6 +20,18 @@ CREATE TABLE houses (
   address VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE boats (
+  id INTEGER PRIMARY KEY,
+  boat_owner_id INTEGER NOT NULL,
+  marina_id INTEGER NOT NULL,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE marinas (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+
 INSERT INTO
   houses (address)
 VALUES
@@ -34,3 +46,13 @@ INSERT INTO
   cats (name, owner_id)
 VALUES
   ("Breakfast", 1), ("Earl", 2), ("Haskell", 3), ("Markov", 3);
+
+INSERT INTO
+  boats (name, boat_owner_id, marina_id)
+VALUES
+  ("Sally Sailin", 1, 1), ("Open Ocean", 2, 1), ("Smooth Seas", 3, 2), ("Boat Boat", 3, 1);
+
+INSERT INTO
+  marinas (name)
+VALUES
+  ("Swamp Station"), ("Marsh Marina");

@@ -48,6 +48,7 @@ module Associatable
 
   def has_many(name, options = {})
     options = HasManyOptions.new(name, self.to_s, options)
+    assoc_options[name] = options # store for use by #has_one_through
     
     define_method(name) do
       primary_key_val = send(options.primary_key)
