@@ -17,5 +17,8 @@ Partner: None (solo day)
 
 Focus:
 
-* Behavior-Driven Development/Test-Driven Development in a Rails app
-* RSpec, Capybara, FactoryGirl, Faker
+* HTTP fundamentals
+* cookies
+* regular expressions
+* deeper understanding of Rails routes, controllers,
+  `params`, `session`, and `flash`
