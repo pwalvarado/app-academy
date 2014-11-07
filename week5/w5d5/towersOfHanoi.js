@@ -3,6 +3,8 @@ var HanoiGame = function() {
 };
 
 HanoiGame.prototype.isWon = function() {
+  console.log('iswon');
+  console.log(this.towers);
   for (var i = 1; i < 3; i++) {
     if (this.towers[i].length === 3) { //assume 3 disks in game
       return true;
@@ -62,14 +64,16 @@ HanoiGame.prototype.run = function(completionCallback) {
   game = this;
   game.promptMove(function (startTowerIdx, endTowerIdx) {
     if (game.move(startTowerIdx, endTowerIdx)) {
-      if (game.isWon) {
+      if (game.isWon()) {
         console.log('you won');
+        completionCallback();
       }
       else {
         game.run(completionCallback);
-      };
+      }
     } else {
       console.log('could not make move');
+      completionCallback();
     }
   });
 };
@@ -77,5 +81,5 @@ HanoiGame.prototype.run = function(completionCallback) {
 var hg = new HanoiGame();
 console.log(hg.towers);
 hg.run(function () {
-  reader.close;
+  reader.close();
 });
