@@ -13,7 +13,7 @@ Day 2-3
 ---
 **Main Project**: Rails Lite
 
-Partner: None (solo day)
+Partner: None (solo days)
 
 Focus:
 
@@ -22,3 +22,14 @@ Focus:
 * regular expressions
 * deeper understanding of Rails routes, controllers,
   `params`, `session`, and `flash`
+
+  Day 4
+  ---
+  **Main Project**: Rails Lite
+
+  Partner: Reza Farajian
+
+  Focus:
+
+  * JavaScript basics
+  * avoiding classic JavaScript gotchas
