@@ -54,7 +54,7 @@ function absurdBubbleSort (arr, sortCompletionCallback) {
   outerBubbleSortLoop(true);
 }
 
-absurdBubbleSort([5, 1, 2, 1], function (arr) {
-  console.log("Sorted array: " + JSON.stringify(arr));
-  reader.close();
-}); 
+// absurdBubbleSort([5, 1, 2, 1], function (arr) {
+//   console.log("Sorted array: " + JSON.stringify(arr));
+//   reader.close();
+// }); 

@@ -17,6 +17,6 @@ function addNumbers(sum, numsLeft, completionCallback){
   }
 }
 
-addNumbers(0, 3, function (sum) {
-  console.log("Total Sum: " + sum);
-});
+// addNumbers(0, 3, function (sum) {
+//   console.log("Total Sum: " + sum);
+// });

@@ -40,5 +40,5 @@ Clock.prototype._tick = function () {
   this.printTime();
 };
 
-clock = new Clock();
-clock.run();
+// clock = new Clock();
+// clock.run();
