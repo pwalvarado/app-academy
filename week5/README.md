@@ -20,17 +20,16 @@ Focus:
 * HTTP fundamentals
 * cookies
 * regular expressions
-* deeper understanding of Rails routes, controllers,
-  `params`, `session`, and `flash`
+* deeper understanding of Rails routes, controllers, `params`, `session`, and `flash`
 
-  Day 4
-  ---
-  **Main Project**: Rails Lite
+Day 4
+---
+**Main Project**: Rails Lite
 
-  Partner: Reza Farajian
+Partner: Reza Farajian
 
-  Focus:
+Focus:
 
-  * JavaScript basics (objects, named functions, anonymous functions,
-    method-style function calls, prototypes, constructors, `this`)
-  * avoiding classic JavaScript gotchas
+* JavaScript basics (objects, named functions, anonymous functions,
+method-style function calls, prototypes, constructors, `this`)
+* avoiding classic JavaScript gotchas
