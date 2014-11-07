@@ -30,6 +30,5 @@ Partner: Reza Farajian
 
 Focus:
 
-* JavaScript basics (objects, named functions, anonymous functions,
-method-style function calls, prototypes, constructors, `this`)
+* JavaScript basics (objects, functions, prototypes, constructors, `this`)
 * avoiding classic JavaScript gotchas
