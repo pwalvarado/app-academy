@@ -1,5 +1,7 @@
 var Board = function() {
-  this.grid = [[null, null, null],[null, null, null],[null, null, null]];
+  this.grid = [[null, null, null],
+               [null, null, null],
+               [null, null, null]];
 };
 
 Board.prototype.print = function() {
@@ -9,10 +11,10 @@ Board.prototype.print = function() {
 };
 
 Board.prototype.isWon = function() {
-  //rows
   var grid = this.grid;
 
   return (
+    //rows
     grid[0][0] && grid[0][0] === grid[0][1] && grid[0][1] === grid[0][2] ||
     grid[1][0] && grid[1][0] === grid[1][1] && grid[1][1] === grid[1][2] ||
     grid[2][0] && grid[2][0] === grid[2][1] && grid[2][1] === grid[2][2] ||

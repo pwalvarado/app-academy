@@ -11,6 +11,10 @@ Game.prototype.currentPlayer = function() {
   return ['x', 'o'][this.turnsPlayed % 2];
 };
 
+Game.prototype.playTurn = function(callback) {
+  this.getMove(callback);
+};
+
 Game.prototype.getMove = function(callback) {
   this.board.print();
   var game = this;
@@ -29,21 +33,23 @@ Game.prototype.makeMove = function(pos, callback) {
   callback();
 };
 
-Game.prototype.processEndOfTurn = function() {
-  if (!this.board.isWon()) {
-    this.turnsPlayed++;
-    this.run();
-  } else {
-    this.board.print();
-    winner = this.currentPlayer();
-    console.log('the winner is ' + winner);
-    this.endOfGameCallback();
-  }
+Game.prototype.handleWin = function() {
+  this.board.print();
+  winner = this.currentPlayer();
+  console.log('the winner is ' + winner);
+  this.endOfGameCallback();
 };
 
 Game.prototype.run = function() {
   var game = this;
-  game.getMove(game.processEndOfTurn.bind(game));
+  game.playTurn(function () {
+    if (game.board.isWon()) {
+      game.handleWin();
+    } else {
+      game.turnsPlayed++;
+      game.run();
+    }
+  });
 };
 
 module.exports = Game;
