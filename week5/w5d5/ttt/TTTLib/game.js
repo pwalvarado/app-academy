@@ -29,19 +29,21 @@ Game.prototype.makeMove = function(pos, callback) {
   callback();
 };
 
+Game.prototype.processEndOfTurn = function() {
+  if (!this.board.isWon()) {
+    this.turnsPlayed++;
+    this.run();
+  } else {
+    this.board.print();
+    winner = this.currentPlayer();
+    console.log('the winner is ' + winner);
+    this.endOfGameCallback();
+  }
+};
+
 Game.prototype.run = function() {
   var game = this;
-  game.getMove(function () {
-    if (!game.board.isWon()) {
-      game.turnsPlayed++;
-      game.run();
-    } else {
-      game.board.print();
-      winner = game.currentPlayer();
-      console.log('the winner is ' + winner);
-      game.endOfGameCallback();
-    }
-  })
+  game.getMove(game.processEndOfTurn.bind(game));
 };
 
 module.exports = Game;
