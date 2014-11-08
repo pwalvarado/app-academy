@@ -24,7 +24,7 @@ Focus:
 
 Day 4
 ---
-**Main Project**: Rails Lite
+**Main Project**: JavaScript Exercises
 
 Partner: Reza Farajian
 
@@ -32,3 +32,17 @@ Focus:
 
 * JavaScript basics (objects, functions, prototypes, constructors, `this`)
 * avoiding classic JavaScript gotchas
+
+Day 5
+---
+**Main Project**: Tic Tac Toe (human players only)
+
+Partner: None (partner absent)
+
+Focus:
+
+* callbacks
+* asynchronicity
+* ```this``` and ```that```
+* ```bind```
+* different ways to call a function in JS
