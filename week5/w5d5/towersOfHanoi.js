@@ -3,7 +3,6 @@ var HanoiGame = function() {
 };
 
 HanoiGame.prototype.isWon = function() {
-  console.log('iswon');
   console.log(this.towers);
   for (var i = 1; i < 3; i++) {
     if (this.towers[i].length === 3) { //assume 3 disks in game
