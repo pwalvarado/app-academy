@@ -30,6 +30,17 @@ Board.prototype.isWon = function() {
   ) ;
 };
 
+Board.prototype.isDrawn = function() {
+  for (var i = 0; i < this.grid.length; i++) {
+    for (var j = 0; j < this.grid[i].length; j++) {
+      if (this.grid[i][j] === null) {
+        return false;
+      }
+    }
+  }
+  return true;
+};
+
 Board.prototype.isEmpty = function(pos) {
   var row = pos[0];
   var col = pos[1];

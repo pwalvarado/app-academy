@@ -40,12 +40,21 @@ Game.prototype.handleWin = function() {
   this.endOfGameCallback();
 };
 
+Game.prototype.handleDraw = function() {
+  this.board.print();
+  console.log('the game was a draw');
+  this.endOfGameCallback();
+};
+
 Game.prototype.run = function() {
   var game = this;
   game.playTurn(function () {
     if (game.board.isWon()) {
       game.handleWin();
-    } else {
+    } else if (game.board.isDrawn()) {
+      game.handleDraw();
+    }
+    else {
       game.turnsPlayed++;
       game.run();
     }
