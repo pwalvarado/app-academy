@@ -1,6 +1,6 @@
 Day 1
 ---
-**Main Project**: Asteroids
+**Main Project**: Asteroids ([Live version](http://davidrunger.github.io/asteroids/index.html))
 
 Partner: Auster Chen (the one and only)
 
