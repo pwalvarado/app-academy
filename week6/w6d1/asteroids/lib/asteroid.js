@@ -8,7 +8,7 @@
   var Asteroid = window.Asteroids.Asteroid = function(asteroidParam){
     MovingObject.call(this, {
       pos: asteroidParam.pos, 
-      vel: window.Asteroids.Util.randomVec(Math.random() * 5 + 1),
+      vel: window.Asteroids.Util.randomVec(Math.random() + 0.5),
       radius: Asteroid.RADIUS,
       color: Asteroid.COLOR,
       game: asteroidParam.game
@@ -27,5 +27,5 @@
   };
   
   Asteroid.COLOR = '#000000';
-  Asteroid.RADIUS = 5;
+  Asteroid.RADIUS = 22;
 })();

@@ -38,7 +38,7 @@
   Game.prototype.draw = function (ctx) {
     
     ctx.clearRect(0,0, Game.DIM_X, Game.DIM_Y);
-    ctx.drawImage(img, 0, 0, 1000, 850)
+    ctx.drawImage(img, 0, 0, 700, 500)
     for(var i = 0; i < this.allObjects().length; i++){
       this.allObjects()[i].draw(ctx);
     }
@@ -129,8 +129,8 @@
     }
   };
   
-  Game.DIM_X = 1000;
-  Game.DIM_Y = 850;
-  Game.NUM_ASTEROIDS = 500;
+  Game.DIM_X = 700;
+  Game.DIM_Y = 500;
+  Game.NUM_ASTEROIDS = 20;
 
 })();

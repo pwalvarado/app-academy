@@ -10,7 +10,7 @@
     <script src="./lib/gameView.js"></script>
   </head>
   <body>
-    <canvas width="1000" height="850" id="canvas"></canvas>
+    <canvas width="700" height="500" id="canvas"></canvas>
     <script>
       var canvas = document.getElementById("canvas");
       var context = canvas.getContext('2d');
@@ -18,10 +18,11 @@
       var gameview = new Asteroids.GameView(game, context);
       var img = new Image();
       img.onload = function () {
-        context.drawImage(img,0,0, 1000, 850);
+        context.drawImage(img,0,0, 700, 500);
       };
       img.src = './lib/myImage.png';
       gameview.start();
     </script>
+    <p>Arrow keys to move, space to fire</p>
   </body>
 </html>

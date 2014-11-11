@@ -31,6 +31,6 @@
     this.game.addBullets(bullet);
   }
   
-  Ship.RADIUS = 20;
+  Ship.RADIUS = 14;
   Ship.COLOR = '#5500FF';
 })();
