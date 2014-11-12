@@ -1,0 +1,222 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+header {
+	background-color: red;
+	color: black;
+	height: 38px;
+	border-bottom: 3px solid black;
+}
+
+
+
+body {
+	font-family: sans-serif;
+}
+
+
+
+aside {
+	float: left;
+	width: 250px;
+	margin: 20px;
+	border-right: 3px solid lightgray;
+}
+
+section {
+	float: left;
+	width: 660px;
+	margin: 20px 30px;
+
+}
+
+footer {
+	clear: both;
+	background-color: lightgray;
+	border: 3px solid darkgray;
+	color: darkgray;
+	padding: 20px;
+}
+
+footer::after {
+	content: "";
+	clear: both;
+	display: block;
+}
+
+h1 {
+	font-weight: bold;
+	font-size: 30px;
+	margin: 0px 0px;
+}
+
+.page-content {
+	border: 3px solid lightgray;
+	border-top: 0px;
+	border-bottom: 0px;
+}
+
+.page-content::after {
+	content: "";
+	clear: both;
+	display: block;
+}
+
+.non-header {
+	margin: 0 110;
+}
+
+p {
+	margin-top: 20px;
+	margin-right: 15px;
+}
+
+
+
+
+.header-nav {
+	float: left;
+	border-right: 3px solid black;
+	color: white;
+}
+
+.header-nav li {
+	border-left: 3px solid black;
+	height: 68%;
+	padding: 15px 14px 0px 14px;
+}
+
+.header-nav > li:first-child {
+	border-left: 0px;
+}
+
+.header-nav li:hover {
+	background-color: black;
+}
+
+.notification-number {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	font-size: 15px;
+	border-radius: 50%;
+	color: #fff;
+	line-height: 26px;
+	text-align: center;
+	background: #000;
+	margin-top: -6px;
+}
+
+.notifications:hover > ul {
+	display: table;
+`
+}
+
+.notifications-dropdown li {
+	display: block;
+	float:none;
+	border: 3px solid black;
+	border-bottom: none;
+	background-color: white;
+	color: black;
+
+}
+
+.notifications-dropdown li:first-child {
+	border-top: none;
+}
+
+.notifications-dropdown li:last-child {
+	border-bottom: 3px solid black;
+}
+
+.notifications-dropdown {
+	position: absolute;
+	display: none;
+	margin-top: 7px;
+	margin-left: -17px;
+
+}
+
+.notifications:hover .notifications-dropdown {
+	display: block;
+}
+
+.notifications-dropdown li:hover {
+	background-color: gray;
+}
+
+li {
+	float: left;
+	padding: 0px 10px;
+}
+
+.copyright {
+	float: left;
+	width: 82%;
+}
+
+.page-title {
+	width: 52.4%;
+	float: left;
+	margin-left: 110px;
+	padding: 0 20px;
+	border-left: 3px solid black;
+	border-right: 3px solid black;
+}
+
+.page-title h1 {
+	font-size: 18px;
+	color: white;
+	padding: 10px;
+}
+
+.notifications:hover .notification-number {
+	background-color: red;
+}

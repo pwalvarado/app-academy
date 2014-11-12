@@ -1,0 +1,56 @@
+
+/** * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/) * http://cssreset.com */html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video {	margin: 0;	padding: 0;	border: 0;	font-size: 100%;	font: inherit;	vertical-align: baseline;}/* HTML5 display-role reset for older browsers */article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {	display: block;}body {	line-height: 1;}ol, ul {	list-style: none;}blockquote, q {	quotes: none;}blockquote:before, blockquote:after,q:before, q:after {	content: '';	content: none;}table {	border-collapse: collapse;	border-spacing: 0;}
+
+
+.posts {
+  border-top: 8px solid lightgray;
+  width: 480px;
+  margin: 0 auto;
+}
+
+.post {
+  border: 8px solid lightgray;
+  border-top: 0px;
+}
+
+.body {
+  border-top: 2px solid lightgray;
+  padding: 25px;
+}
+
+.post-time {
+  color: lightgray;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+  border: 2px solid blue;
+  margin: 19px;
+  display: inline-block;
+  float: left;
+}
+
+.post-author {
+  margin-top: 22px;
+  color: blue;
+  font-weight: bold;
+}
+
+.post-header {
+  display: inline-block;
+  float: left;
+  width: 300px;
+}
+
+.body {
+  clear: left
+}
+
+p {
+  margin: 0px
+}
+
+body {
+  font-family: sans-serif;
+}
