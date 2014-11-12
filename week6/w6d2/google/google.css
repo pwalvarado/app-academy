@@ -98,6 +98,10 @@ button:active {
 
 }
 
+section {
+	padding: 133px;
+}
+
 section img[src="google.gif"] {
 	display: block;
 	clear: both;
