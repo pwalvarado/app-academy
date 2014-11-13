@@ -6,7 +6,7 @@
   var Snake = Worm.Snake = function (board) {
     this.dir = "N";
     this.segments = [[12, 9], [11, 9], [10, 9]];
-    this.turnsSinceEatingApple = 4;
+    this.turnsSinceEatingApple = 3; // so snake won't grow when initialized
     this.board = board;
   };
   
