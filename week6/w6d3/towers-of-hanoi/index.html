@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Towers of Hanoi</title>
+    <link rel="stylesheet" type="text/css" href="css/hanoi.css">
+  </head>
+  <body>
+  	<h1>Towers of Hanoi</h1>
+    <div id="towers"></div>
+	<p id="rules">
+		<strong>Rules: </strong> The towers are stacked from smallest on top to
+    biggest on the bottom. To win, you must restack the disks in a different 
+    pile (the middle or the right) in the correct order (smallest on the top, 
+    biggest on the bottom). You may never place a bigger disk on top of a 
+    smaller disk.
+	</p>
+    
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/hanoi-core.js"></script>
+    <script src="js/hanoi-view.js"></script>
+    <script>
+      var $towers = $('#towers');
+      var game = new Hanoi.Game();
+      var view = new Hanoi.View(game, $towers);
+    </script>
+  </body>
+</html>

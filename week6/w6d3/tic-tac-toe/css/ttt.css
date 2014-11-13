@@ -1,18 +1,26 @@
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
 div#board{
-    height: 156px;
-    width: 156px;
-    margin-left: auto;
-    margin-right:auto;
+  height: 156px;
+  width: 156px;
+  margin-left: auto;
+  margin-right:auto;
 }
 
 .cell {
-    height: 50px;
-    width: 50px;
-    float:left;
-    border: 1px solid black;
+  height: 50px;
+  width: 50px;
+  float:left;
+  border: 1px solid black;
 }
 
 .row{
-    height: 52px;
-    width: 156px;
+  height: 52px;
+  width: 156px;
 }

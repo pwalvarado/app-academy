@@ -1,5 +1,18 @@
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+#rules {
+  width: 500px;
+  margin: 0 auto;
+}
+
 #towers {
-  margin: 100px auto;
+  margin: 50px auto;
   width: 606px;
 }
 
