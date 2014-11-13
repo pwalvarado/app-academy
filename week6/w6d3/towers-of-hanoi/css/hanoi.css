@@ -1,0 +1,49 @@
+#towers {
+  margin: 100px auto;
+  width: 606px;
+}
+
+#towers::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.tower {
+  border: 1px solid black;
+  height: 90px;
+  width: 200px;
+  float: left;
+  background: white; 
+}
+
+.selected {
+  background: blue;
+}
+
+
+.disk-0, .disk-1, .disk-2, .disk-3 {
+  height: 30px;
+  background: red;
+  margin-left: auto;
+  margin-right: auto;  
+}
+
+.disk-0{
+  width: 0px;
+}
+
+.disk-1{
+  width: 50px;
+  content: "1";
+}
+
+.disk-2{
+  width: 100px;
+  content: "2";
+}
+
+.disk-3{
+  width: 150px;
+  content: "3";
+}

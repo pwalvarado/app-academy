@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Worm</title>
+    <link rel="stylesheet" type="text/css" href="worm.css">
+  </head>
+  <body>
+    <h1><span class="green">Worm</span><span class="red">!</span></h1>
+    <h3>Your length: <span id="length">3</span></h3>
+    <div id="board"></div>
+    <script src="jquery-2.1.1.js"></script>
+    <script src="snake.js"></script>
+    <script src="board.js"></script>
+    <script src="snake-view.js"></script>
+    <script>
+    
+    var $board = $('#board');
+    var view = new Worm.View($board);
+    var interval = view.start();
+    
+    function over () {
+      clearInterval(interval);
+      view = new Worm.View($board);
+      interval = view.start();
+    };
+    
+    </script>
+  </body>
+</html>

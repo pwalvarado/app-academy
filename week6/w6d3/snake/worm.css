@@ -1,0 +1,37 @@
+body {
+  font-family: sans-serif;
+}
+
+.green {
+  color: darkgreen;
+}
+
+.red {
+  color: red;
+}
+
+h1, h3 {  
+	text-align: center;
+}
+
+#board {
+  width: 340px;
+  height: 340px;
+  margin: 0 auto;
+}
+
+#board > div {
+  width: 15px;
+  height: 15px;
+  background: white;
+  float: left;
+  border: 1px solid black;
+}
+
+#board > div.snake {
+  background: green;
+}
+
+#board > div.apple {
+  background: red;
+}
