@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Tabs Demo</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="tabs.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css">
+    <link href="tabs.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <ul class='tabs' data-content-tabs="#content-tabs">
+      <li><a href='#corgi' class="active">Corgi</a></li>
+      <li><a href='#husky'>Husky</a></li>
+      <li><a href='#dingo'>Dingo</a></li>
+    </ul>
+      <div id="content-tabs">
+        <div class="tab-pane active" id="corgi">
+          <p>Appearance: The Pembroke Welsh Corgi is a low-set dog with a strong sturdy build and intelligent expression. Size: The overall height of the Pembroke Welsh Corgi should between 10 and 12 inches. Their weight should be proportionate to their size but not exceed 28 pounds for females and 30 pounds for males. Companionship: The Pembroke Welsh Corgi is a very protective and devoted dog.
+          </p>
+        </div>
+        <div class="tab-pane" id="husky">
+          <p>Husky /ˈhʌski/ is a general name for a type of dog used to pull sleds in northern regions, differentiated from other sled-dog types by their fast pulling style.[1] They are "an ever-changing cross-breed of the...fastest dogs".[2] The Alaskan Malamute, by contrast, is "the largest and most powerful" sled dog,[3] and was used for heavier loads. Huskies are used in sled dog racing. In recent years companies have been marketing tourist treks with dog sledges for adventure travelers in snow regions as well.[4] Huskies are also today kept as pets, and groups work to find new pet homes for retired racing and adventure trekking dogs.[5]
+          </p>
+        </div>
+        <div class="tab-pane" id="dingo">
+          <p>The dingo (Canis lupus dingo) is a free-ranging dog found mainly in Australia. Its exact ancestry is debated, but dingoes are generally believed to be descended from semi-domesticated dogs from Asia or India, which returned to a wild lifestyle when introduced to Australia. As such, it is currently classified as a subspecies of the grey wolf, Canis lupus. The Australian name has therefore sometimes been applied to similar dogs in South-East Asia, believed to be close relations. As free-ranging animals, they are not considered tame, although tame dingoes and dingo-dog hybrids have been bred.
+          </p>
+        </div>     
+      </div>
+
+    <script>
+      $(function() {
+        $('.tabs').tabs();
+      })
+    </script>
+  </body>
+</html>

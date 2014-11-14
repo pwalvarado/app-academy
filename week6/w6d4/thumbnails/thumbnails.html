@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Thumbnails Demo</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="thumbnails.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css">
+    <link href="thumbnails.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <div class="thumbnails">
+      <div class="active">
+        <img>
+      </div>
+      <div class="gutter">
+        <a href="#" class="nav">&lt;</a>
+        <div class="gutter-images">
+          <img src="cat.jpg" alt="cat">
+          <img src="dog.jpg" alt="dog">
+          <img src="hotrod.jpg" alt="hotrod">
+          <img src="mini.jpg" alt="mini">
+          <img src="pig.jpg" alt="pig">
+          <img src="analysis.jpg" alt="analysis.jpg">
+          <img src="bambi.jpg" alt="bambi.jpg">
+          <img src="goku.jpg" alt="goku.jpg">
+          <img src="race.jpg" alt="race.jpg">
+          <img src="ratrace.jpg" alt="ratrace.jpg">
+          <img src="rave.jpg" alt="rave.jpg">
+          <img src="rhino.jpg" alt="rhino.jpg">
+          <img src="cubicle.jpg" alt="cubicle.jpg">
+          <img src="eclipse.jpg" alt="eclipse.jpg">
+          <img src="meeting.jpg" alt="meeting.jpg">
+          <img src="motocross.jpg" alt="motocross.jpg">
+        </div>
+        <a href="#" class="nav">&gt;</a>
+      </div>
+    </div>
+    <script>
+      $(function() {
+        $('.thumbnails').thumbnails();
+      })
+    </script>
+  </body>
+</html>

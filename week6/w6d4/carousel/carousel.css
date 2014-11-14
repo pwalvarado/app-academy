@@ -1,0 +1,29 @@
+.carousel {
+  height: 180px;
+  width: 260px;
+}
+
+div.items {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+div.items :not(.active) {
+  display: none;
+}
+
+div.items .active{
+   position: absolute;
+   transition: 0.5s linear;
+   left: 0%;
+}
+
+div.items .active.right {
+  left: 100%;
+}
+
+div.items .active.left {
+  left: -100%;
+}

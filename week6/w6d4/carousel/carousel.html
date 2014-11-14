@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Carousel Demo</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="carousel.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css">
+    <link href="carousel.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <div class="carousel">
+      <div class="items">
+        <img src="corgi1.jpg" alt="corgi 1">
+        <img src="corgi2.jpg" alt="corgi 2">
+        <img src="corgi3.jpg" alt="corgi 3">
+      </div>
+
+      <a href="javascript:void(0)" class="slide-right">Prev</a>
+      <a href="javascript:void(0)" class="slide-left">Next</a>
+    </div>
+    <script>
+      $(function() {
+        $('.carousel').carousel();
+      })
+    </script>
+  </body>
+</html>
