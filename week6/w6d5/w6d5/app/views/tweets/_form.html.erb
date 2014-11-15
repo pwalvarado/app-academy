@@ -1,0 +1,22 @@
+<h2>New Tweet!</h2>
+<form class="tweet-compose"> 
+  <label>
+    Content
+    <textarea name="tweet[content]" id="tweet-content" maxlength="140" rows="5" cols="40"></textarea>
+  </label>
+  <br>
+
+  <label>
+    Mention
+    <select name="tween[mentioned_user_ids]" id="mentioned-user-ids">
+      <option></option>
+      <% User.all.each do |user| %>
+        <option value="<%= user.id %>"><%= user.username %></option>
+      <% end %>
+    </select>
+  </label>
+  <br>
+  
+  <p>Chars left: <strong class="chars-left">140</strong></p>
+  <button id="tweet-submit" type="submit">Post Tweet!</button>
+</form>
