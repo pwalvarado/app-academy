@@ -1,5 +1,5 @@
-# AJAX Twitter
+# Twitter clone
 
-+ [Live Demo][live-demo]
+We built some jQuery plugins that use Ajax in app/assets/javascripts.
 
-[live-demo]: http://aa-twitter.herokuapp.com/
+(Most of this code was provided in advance for us.)
