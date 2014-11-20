@@ -1,0 +1,14 @@
+// Place all the styles related to the Root controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sidebar {
+  float: left;
+  width: 22%;
+  border-right: 2px solid black;
+}
+
+.content {
+  float: left;
+  width: 70%;
+}

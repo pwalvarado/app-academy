@@ -1,0 +1,17 @@
+<h1><%= post.id ? 'Edit' : 'New' %> Post</h1>
+
+<form id="post-form">
+  
+  <label>Post Title
+    <input type="text" name="post[title]" value="<%= post.escape('title')%>">
+  </label>
+  
+  <label>Post Body
+    <textarea name="post[body]"><%= post.escape('body') %></textarea>
+  </label>
+
+  <input type="submit" name="Submit">
+  
+</form>
+
+<a href="#/">Back</a>
