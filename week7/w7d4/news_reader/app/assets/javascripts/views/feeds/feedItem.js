@@ -1,4 +1,4 @@
-NewsReader.Views.Entry = Backbone.View.extend({
+NewsReader.Views.feedItem = Backbone.View.extend({
   events: {
     "click .delete-feed": "destroy"
   },
@@ -13,5 +13,5 @@ NewsReader.Views.Entry = Backbone.View.extend({
     return this;
   },
   
-  template: JST['entries/entry']
+  template: JST['feeds/feed_item']
 });

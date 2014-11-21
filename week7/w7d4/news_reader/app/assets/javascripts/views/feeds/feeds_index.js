@@ -14,11 +14,14 @@ NewsReader.Views.FeedsIndex = Backbone.View.extend({
   },
   
   addSubviews: function () {
-    this.entryViews = [];
-    this.collection.each(function (entry) {
-      var entryView = new NewsReader.Views.Entry({ model: entry });
-      this.entryViews.push(entryView.render());
+    this.feedItems = [];
+    this.collection.each(function (feed) {
+      var feedItem = new NewsReader.Views.feedItem({ model: feed });
+      this.feedItems.push(feedItem.render());
     }.bind(this));
+    this.collection.models.sort(function (a,b) {
+      return Date.parse(a.attributes.created_at) - Date.parse(b.attributes.created_at);
+    });
   },
   
   attachFormView: function () {
@@ -28,9 +31,9 @@ NewsReader.Views.FeedsIndex = Backbone.View.extend({
   
   attachSubviews: function () {
     var $ul = $('<ul class="list-unstyled">');
-    this.entryViews.forEach(function(entryView) {
-      if (entryView.model.id) {
-        $ul.append(entryView.render().$el);
+    this.feedItems.forEach(function(feedItem) {
+      if (feedItem.model.id) {
+        $ul.append(feedItem.render().$el);
       }
     });
     this.$el.append($ul);
@@ -39,7 +42,7 @@ NewsReader.Views.FeedsIndex = Backbone.View.extend({
   render: function (fetch_complete) {
     this.$el.empty();
     this.$el.append(JST['feeds/header']());
-    if (this.entryViews && this.entryViews.length > 0) {
+    if (this.feedItems && this.feedItems.length > 0) {
       this.attachSubviews();
     } else if (!fetch_complete) {
       this.$el.append(JST['feeds/loading']());
