@@ -3,7 +3,7 @@
 <button id="refresh">Load new posts</button>
 
 <ul class="feed-items list-unstyled">
-  <% entries.models.reverse().forEach(function (entry) { %>
+  <% entries.forEach(function (entry) { %>
     <li>
       <a href="<%=entry.escape("link")%>"><%= entry.escape('title') %></a>
     </li>

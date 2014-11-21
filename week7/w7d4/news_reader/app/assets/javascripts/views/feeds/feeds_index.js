@@ -1,12 +1,9 @@
 NewsReader.Views.FeedsIndex = Backbone.View.extend({
   initialize: function () {
     this.addFormView();
-    this.listenTo(
-      this.collection,
-      'sync remove add',
-      function () {
+    this.listenTo(this.collection, 'sync remove add', function () {
         this.addSubviews();
-        this.render();
+        this.render(true);
       }.bind(this)
     );
   },
@@ -36,17 +33,18 @@ NewsReader.Views.FeedsIndex = Backbone.View.extend({
         $ul.append(entryView.render().$el);
       }
     });
-    console.log($ul);
     this.$el.append($ul);
   },
   
-  render: function () {
+  render: function (fetch_complete) {
     this.$el.empty();
-    this.$el.append(JST['feeds/index']());
-    if (this.entryViews) {
+    this.$el.append(JST['feeds/header']());
+    if (this.entryViews && this.entryViews.length > 0) {
       this.attachSubviews();
+    } else if (!fetch_complete) {
+      this.$el.append(JST['feeds/loading']());
     } else {
-      this.$el.append(JST['feeds/loading']);
+      this.$el.append(JST['feeds/no_feeds']());
     }
     this.attachFormView();
     return this;
