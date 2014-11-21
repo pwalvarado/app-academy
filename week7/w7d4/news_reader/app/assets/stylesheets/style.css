@@ -6,13 +6,28 @@ body {
   padding: 35px;
 }
 
-#logo {
+.container {
   position: absolute;
-  top: -25px;
-  left: 10px;
+  top: 100px;
+}
+
+#logo {
+  margin: 0px;
+  position: absolute;
+  font-size: 80px;
+  left: 90px;
+  top: 15px;
 }
 
 h1 {
+  margin-top: 27px;
+}
+
+#refresh {
+  margin-left: 20px;
+}
+
+.loading {
   margin-top: 35px;
 }
 
@@ -31,6 +46,10 @@ button.delete-feed .glyphicon {
   position: absolute;
   top: 3px;
   left: 3px;
+}
+
+ul.feed-items {
+  padding-top: 10px;
 }
 
 ul.list-unstyled li {

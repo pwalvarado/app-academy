@@ -4,7 +4,10 @@ NewsReader.Views.FeedShow = Backbone.View.extend({
   },
   
   events: {
-    "click #refresh": "refresh"
+    "click #refresh": "refresh",
+    "click #back": function () {
+      Backbone.history.navigate("#/", {trigger: true});
+    }
   },
   
   refresh: function () {
@@ -13,6 +16,7 @@ NewsReader.Views.FeedShow = Backbone.View.extend({
   },
   
   render: function () {
+    this.$el.html(JST['feeds/back_to_feeds']());
     var content;
     var firstModelAttrs = this.model.entries().models[0].attributes;
     if (this.model.entries() && !$.isEmptyObject(firstModelAttrs)) {
@@ -24,7 +28,7 @@ NewsReader.Views.FeedShow = Backbone.View.extend({
       content = JST['entries/loading']();
     }
     
-    this.$el.html(content);
+    this.$el.append(content);
     return this;
   },
   

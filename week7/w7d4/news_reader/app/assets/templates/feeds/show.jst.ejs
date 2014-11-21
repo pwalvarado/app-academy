@@ -1,6 +1,8 @@
 <h1><%= feed.escape('title') %></h1>
 
-<button id="refresh">Load new posts</button>
+<button id="back" class="btn btn-info"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> All feeds</button>
+
+<button id="refresh" class="btn btn-info">Load new posts</button>
 
 <ul class="feed-items list-unstyled">
   <% entries.forEach(function (entry) { %>
