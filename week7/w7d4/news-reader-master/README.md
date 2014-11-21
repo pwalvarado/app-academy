@@ -1,1 +1,0 @@
-skeleton/README.md
