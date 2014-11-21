@@ -1,6 +1,6 @@
 NewsReader.Views.Entry = Backbone.View.extend({
   events: {
-    "click #delete": "destroy"
+    "click .delete-feed": "destroy"
   },
   
   destroy: function() {

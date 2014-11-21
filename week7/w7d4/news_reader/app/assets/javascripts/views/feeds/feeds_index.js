@@ -30,15 +30,23 @@ NewsReader.Views.FeedsIndex = Backbone.View.extend({
   },
   
   attachSubviews: function () {
+    var $ul = $('<ul class="list-unstyled">');
     this.entryViews.forEach(function(entryView) {
-      this.$el.append(entryView.render().$el);
-    }.bind(this));
+      if (entryView.model.id) {
+        $ul.append(entryView.render().$el);
+      }
+    });
+    console.log($ul);
+    this.$el.append($ul);
   },
   
   render: function () {
     this.$el.empty();
+    this.$el.append(JST['feeds/index']());
     if (this.entryViews) {
       this.attachSubviews();
+    } else {
+      this.$el.append(JST['feeds/loading']);
     }
     this.attachFormView();
     return this;

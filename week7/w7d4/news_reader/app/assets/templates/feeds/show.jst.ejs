@@ -1,12 +1,11 @@
 <h1><%= feed.escape('title') %></h1>
 
-<button id="refresh">Refresh</button>
+<button id="refresh">Load new posts</button>
 
-<ul>
-  <% entries.forEach(function (entry) { %>
+<ul class="feed-items list-unstyled">
+  <% entries.models.reverse().forEach(function (entry) { %>
     <li>
       <a href="<%=entry.escape("link")%>"><%= entry.escape('title') %></a>
     </li>
   <% }); %>
 </ul>
-
