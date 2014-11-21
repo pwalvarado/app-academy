@@ -9,6 +9,7 @@ NewsReader.Views.FeedShow = Backbone.View.extend({
   
   refresh: function () {
     this.model.fetch();
+    this.render();
   },
   
   render: function () {
@@ -17,7 +18,7 @@ NewsReader.Views.FeedShow = Backbone.View.extend({
     if (this.model.entries() && !$.isEmptyObject(firstModelAttrs)) {
       content = this.template({ 
         feed: this.model, 
-        entries: this.model.entries().models.sort(function(a, b){return a.id - b.id})
+        entries: this.model.entries().models.sort(function(a, b){return Date.parse(b.get('published_at')) - Date.parse(a.get('published_at'))})
       });
     } else {
       content = JST['entries/loading']();

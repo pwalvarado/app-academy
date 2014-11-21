@@ -1,6 +1,5 @@
 class Api::FeedsController < ApplicationController
   def index
-    sleep 3
     render :json => Feed.all
   end
 

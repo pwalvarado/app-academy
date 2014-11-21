@@ -1,6 +1,5 @@
 class Api::EntriesController < ApplicationController
   def index
-    sleep 3
     feed = Feed.find(params[:feed_id])
     render :json => feed.entries
   end

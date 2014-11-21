@@ -42,3 +42,4 @@ gem "twitter-bootstrap-rails"
 gem 'ejs'
 gem 'simple-rss'
 gem 'font_assets'
+gem 'rails_12factor', group: :production
