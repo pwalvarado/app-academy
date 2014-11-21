@@ -1,0 +1,11 @@
+<h1><%= (feed.id) ? 'Edit' : 'New' %> Feed</h1>
+
+<form id="feed-form">
+  
+  <label>Feed Url
+    <input type="text" name="feed[url]" value="<%=feed.escape('url')%>">
+  </label>
+  
+  <input type="submit" value="<%= (feed.id) ? 'Update' : 'Create' %> Feed">
+  
+</form>

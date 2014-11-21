@@ -31,3 +31,13 @@ Partner: Justin Farooq
 Focus:
 
 * Backbone events
+
+Day 4
+---
+**Main Project**: RSS Feed Reader
+
+Partner: Justin Farooq
+
+Focus:
+
+* Backbone subviews
