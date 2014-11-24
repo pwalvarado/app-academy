@@ -13,6 +13,8 @@ TrelloClone.Views.BoardsIndexView = Backbone.CompositeView.extend({
   },
 
   render: function () {
+    var content = this.template();
+    this.$el.html(content);
     this.addBoardItems('#board-items');
     this.attachSubviews();
     return this;
