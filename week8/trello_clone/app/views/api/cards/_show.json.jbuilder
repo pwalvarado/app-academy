@@ -1,1 +1,1 @@
-json.extract!(card, :title, :description);
+json.extract!(card, :id, :title, :description);

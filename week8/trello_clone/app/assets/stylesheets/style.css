@@ -116,3 +116,7 @@ div.new-card {
 .new-card-form label:first-of-type {
   padding-top: 0px;
 }
+
+.save-card {
+  margin: 5px auto 0px auto;
+}
