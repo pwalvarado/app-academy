@@ -22,9 +22,10 @@ module Api
     end
 
     def show
-      @board = Board.includes(:members, lists: :cards).find(params[:id])
+      @board = Board.find(params[:id])
+      p @board
 
-      if @board.is_member?(current_user)
+      if @board
         render :show
       else
         render json: ["You aren't a member of this board"], status: 403

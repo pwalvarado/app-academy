@@ -1,28 +1,20 @@
-TrelloClone.Views.BoardsIndexView = Backbone.View.extend({
-  addSubviews: function () {
-    this.subviews = [];
+TrelloClone.Views.BoardsIndexView = Backbone.CompositeView.extend({
+  addBoardItems: function (selector) {
     this.collection.each(function (board) {
-      var subview = new TrelloClone.Views.BoardItem({
+      var boardItemView = new TrelloClone.Views.BoardItem({
         model: board, collection: this.collection
       });
-      this.subviews.push(subview);
+      this.addSubview(selector, boardItemView);
     }.bind(this));
-  },
-
-  events: {
-    'click': 'showBoard'
   },
 
   initialize: function () {
-    this.listenTo(this.collection, 'sync add remove', this.render);
+    this.listenTo(this.collection, 'sync', this.render);
   },
 
   render: function () {
-    this.$el.empty();
-    this.addSubviews();
-    this.subviews.forEach(function (subview) {
-      this.$el.append(subview.render().$el);
-    }.bind(this));
+    this.addBoardItems('#board-items');
+    this.attachSubviews();
     return this;
   },
 

@@ -14,11 +14,7 @@ TrelloClone.Views.BoardItem = Backbone.View.extend({
   },
 
   showBoard: function () {
-    console.log('show board ' + this.model.id);
-    var board = this.collection.get(this.model.id);
-    board.fetch();
-    var boardShowView = new TrelloClone.Views.BoardShowView({ model: board });
-    this.$el.html(boardShowView.render().$el);
+    Backbone.history.navigate('/' + this.model.url());
   },
 
   template: JST['boards/board_item']
