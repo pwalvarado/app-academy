@@ -91,7 +91,7 @@ h5 {
   font-size: 20px;
 }
 
-.card {
+.card, .new-card-form {
   background-color: #E8D3E8;
   padding: 10px;
   margin: 10px;
@@ -103,4 +103,16 @@ h5 {
 
 div.new-card {
   text-align: center;
+}
+
+.new-card-form label,
+.new-card-form input,
+.new-card-form textarea {
+  padding-top: 8px;
+  display: block;
+  width: 100%;
+}
+
+.new-card-form label:first-of-type {
+  padding-top: 0px;
 }

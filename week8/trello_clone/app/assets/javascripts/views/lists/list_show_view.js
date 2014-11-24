@@ -1,6 +1,7 @@
 TrelloClone.Views.ListShowView = Backbone.CompositeView.extend({
-  addCard: function () {
-    this.$el.append($('<p>hi</p>'));
+  addCard: function (event) {
+    var newCardView = new TrelloClone.Views.NewCardView();
+    this.$('.cards-container').append(newCardView.render().$el);
   },
 
   addCards: function (selector) {
@@ -10,14 +11,12 @@ TrelloClone.Views.ListShowView = Backbone.CompositeView.extend({
         model: card,
         className: 'card'
       });
-      console.log(cardView);
       this.addSubview(selector, cardView.render());
     }.bind(this));
   },
 
   events: {
-    "click a.new-card-link": addCard
-    }
+    "click a": 'addCard'
   },
 
   initialize: function () {
