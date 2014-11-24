@@ -18,7 +18,7 @@ TrelloClone.Views.ListShowView = Backbone.CompositeView.extend({
   render: function () {
     var content = this.template({ list: this.model });
     this.$el.html(content);
-    this.model.attributes.cards && this.addCards('#cards-container');
+    this.model.attributes.cards && this.addCards('.cards-container');
     this.attachSubviews();
     return this;
   },
