@@ -86,3 +86,13 @@ h1 {
   font-size: 35px;
   padding: 15px 30px;
 }
+
+h5 {
+  font-size: 20px;
+}
+
+.card {
+  background-color: #E8D3E8;
+  padding: 10px;
+  margin: 10px;
+}
