@@ -96,3 +96,11 @@ h5 {
   padding: 10px;
   margin: 10px;
 }
+
+.cards-container {
+  min-height: 10px;
+}
+
+div.new-card {
+  text-align: center;
+}
