@@ -1,0 +1,4 @@
+<h1><%= board.escape('title') %></h1>
+<% board.attributes.lists && board.attributes.lists.forEach(function(list) { %>
+  <p><%= list.title %></p>
+<% }); %>
