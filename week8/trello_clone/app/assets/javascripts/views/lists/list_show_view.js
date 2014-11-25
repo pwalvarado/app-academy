@@ -5,11 +5,9 @@ TrelloClone.Views.ListShowView = Backbone.CompositeView.extend({
   },
 
   addCards: function (selector) {
-    this.model.attributes.cards.forEach(function (cardAttrs) {
-      var card = new TrelloClone.Models.Card(cardAttrs);
+    this.collection.each(function (card) {
       var cardView = new TrelloClone.Views.CardShowView({
-        model: card,
-        className: 'card'
+        model: card
       });
       this.addSubview(selector, cardView.render());
     }.bind(this));
@@ -21,7 +19,8 @@ TrelloClone.Views.ListShowView = Backbone.CompositeView.extend({
   },
 
   initialize: function () {
-    // this.listenTo(this.collection, 'sync', this.render);
+    this.collection = new TrelloClone.Collections.Cards(this.model.attributes.cards);
+    this.listenTo(this.collection, 'add', this.render)
   },
 
   onRender: function () {
@@ -36,7 +35,7 @@ TrelloClone.Views.ListShowView = Backbone.CompositeView.extend({
   render: function () {
     var content = this.template({ list: this.model });
     this.$el.html(content);
-    this.model.attributes.cards && this.addCards('.cards-container');
+    this.collection && this.addCards('.cards-container');
     this.attachSubviews();
     return this;
   },
@@ -47,6 +46,8 @@ TrelloClone.Views.ListShowView = Backbone.CompositeView.extend({
     var newCard = new TrelloClone.Models.Card(cardAttrs);
     newCard.set('list_id', this.model.id)
     newCard.save();
+    this.subviews()['.cards-container'] = []
+    this.collection.add(newCard);
   },
 
   template: JST['lists/list_show']

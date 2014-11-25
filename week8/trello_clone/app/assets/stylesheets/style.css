@@ -120,3 +120,11 @@ div.new-card {
 .save-card {
   margin: 5px auto 0px auto;
 }
+
+.card-content {
+  float: left;
+}
+
+.remove-card {
+  float: right;
+}
