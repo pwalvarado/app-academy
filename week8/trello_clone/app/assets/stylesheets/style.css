@@ -128,3 +128,9 @@ div.new-card {
 .remove-card {
   float: right;
 }
+
+.card:after {
+  content: '';
+  clear: both;
+  display: block;
+}

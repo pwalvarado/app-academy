@@ -28,7 +28,9 @@ TrelloClone.Views.ListShowView = Backbone.CompositeView.extend({
     this.$( ".cards-container" ).sortable({
       appendTo: document.body,
       connectWith: '.cards-container',
-      tolerance: 'pointer'
+      update: function () {
+        console.log('working');
+      }
     });
   },
 
