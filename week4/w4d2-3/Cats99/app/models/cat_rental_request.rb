@@ -18,7 +18,7 @@ class CatRentalRequest < ActiveRecord::Base
     message: "YOU CAN NOT RENT A KITTY THAT WAY" }
   validate :no_overlapping_requests
   after_initialize :set_default_status
-  
+
   belongs_to(:cat)
   belongs_to(
     :requester,
@@ -26,7 +26,7 @@ class CatRentalRequest < ActiveRecord::Base
     foreign_key: :requester_id,
     primary_key: :id
   )
-  
+
   def overlapping_requests
     query = CatRentalRequest.where(<<-SQL)
       ('#{start_date}' BETWEEN start_date AND end_date)
@@ -34,14 +34,14 @@ class CatRentalRequest < ActiveRecord::Base
       OR start_date BETWEEN '#{start_date}' AND '#{end_date}'
     SQL
     query = query.where("cat_id = #{cat_id}")
-    
+
     if self.persisted?
       query.where("id != #{id}")
     else
       query
     end
   end
-  
+
   def no_overlapping_requests
     return unless cat_id && start_date && end_date
     approved_requests = overlapping_requests.where("status = 'APPROVED'")
@@ -50,22 +50,22 @@ class CatRentalRequest < ActiveRecord::Base
         "Kitty #{Cat.find(cat_id).name} is already rented during that time"
     end
   end
-  
+
   def set_default_status
     @status ||= 'PENDING'
   end
-  
+
   def approve!
     CatRentalRequest.transaction do
       overlapping_requests.update_all(status: "DENIED")
       self.update(status: "APPROVED")
     end
   end
-  
+
   def deny!
     self.update!(status: "DENIED")
   end
-  
+
   def pending?
     status == 'PENDING'
   end
