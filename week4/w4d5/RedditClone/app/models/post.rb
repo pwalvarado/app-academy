@@ -12,15 +12,15 @@
 #
 
 class Post < ActiveRecord::Base
-  validates :title, :author_id, presence: true
-  
+  validates :title, :author_id, :subs, presence: true
+
   belongs_to(
     :author,
     class_name: "User",
     foreign_key: :author_id,
     primary_key: :id
   )
-  
+
   has_many :post_subs, dependent: :destroy, inverse_of: :post
   has_many :subs, through: :post_subs
   has_many(
@@ -28,19 +28,19 @@ class Post < ActiveRecord::Base
     -> { where(parent_comment_id: "NULL") },
     class_name: "Comment"
   )
-  
+
   has_many(
     :comments,
     -> { includes(:author) },
     class_name: "Comment"
   )
-  
+
   def comments_by_parent_id
     parent_comment_hash = Hash.new { |h, k| h[k] = [] }
     comments.each do |comment|
       parent_comment_hash[comment.parent_comment_id] << comment
     end
-    
+
     parent_comment_hash
   end
 end
