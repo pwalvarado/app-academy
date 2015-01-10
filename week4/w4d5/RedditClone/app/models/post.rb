@@ -12,6 +12,7 @@
 #
 
 class Post < ActiveRecord::Base
+  include Votable
   validates :title, :author_id, :subs, presence: true
 
   belongs_to(

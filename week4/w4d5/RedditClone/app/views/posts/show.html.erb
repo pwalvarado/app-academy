@@ -1,10 +1,11 @@
 <h1><%= link_to @post.title, @post.url %></h1>
+<h4>Score: <%= @post.vote_total %></h4>
 
 <p><%= @post.content %></p>
 
 <ul>
   <% @comments_by_parent_id[nil].each do |c1| %>
-    <%= render "comments/comment", post: @post, c1: c1, 
+    <%= render "comments/comment", post: @post, c1: c1,
         comments_by_parent_id: @comments_by_parent_id%>
   <% end %>
 </ul>
