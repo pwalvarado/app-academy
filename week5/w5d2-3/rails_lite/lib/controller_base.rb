@@ -1,9 +1,9 @@
 require_relative './session'
 require_relative './params'
 require_relative './flash'
-require 'active_support/core_ext'
 require 'erb'
 require 'securerandom'
+require 'byebug'
 
 class ControllerBase
   attr_accessor :already_built_response
