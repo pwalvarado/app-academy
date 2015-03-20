@@ -41,3 +41,15 @@ Partner: Justin Farooq
 Focus:
 
 * Backbone subviews
+
+Day 5
+---
+**Main Project**: Trello Clone
+
+Partner: none (solo day)
+
+Focus:
+
+* Backbone CompositeView
+* jQuery UI (sortable)
+
